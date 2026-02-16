@@ -1,0 +1,81 @@
+class WordCombo{
+    constructor(scene, x, y, word, config, highlightedConfig, onCompleteCallback){
+        this.scene = scene
+        this.word = word
+        this.config = config
+        this.highlightedConfig = highlightedConfig
+        this.letterTexts = []
+        this.currentLetterIndex = 0
+        this.onCompleteCallback = onCompleteCallback
+
+        // create text objects for each letter in the word
+        for(let i = 0; i < word.length; i++){
+            let letterSpacing = 0.55 * config.fontSize.slice(0, 2)
+            let letter = word[i]
+            let letterText = scene.add.text(x + i * letterSpacing, y, letter, config).setOrigin(0.5)
+
+            // floating animation (phaser examples)
+            scene.tweens.add({
+                targets: letterText,
+                y: letterText.y - 8,
+                delay: i * 200, // wiggle effect
+                duration: 1600,
+                yoyo: true,
+                repeat: -1,
+                ease: 'Sine.inout'
+            })
+            this.letterTexts.push(letterText)
+        }
+
+        // keyboard logic
+        scene.input.keyboard.on('keydown', (event) => {
+            if(this.currentLetterIndex >= this.word.length){
+                return
+            }
+
+            // match letter
+            if(event.key.toLowerCase() === this.word[this.currentLetterIndex].toLowerCase()){
+                this.letterTexts[this.currentLetterIndex].setStyle(this.highlightedConfig) // highlight letter
+                this.currentLetterIndex++
+
+                // word fully typed
+                if(this.currentLetterIndex === this.word.length){
+                    this.wordComplete()
+                }
+            }
+            else{ // reset if got wrong letter
+                this.resetCombo()
+            }
+        })
+    }
+
+    // no highlights, reset to first index
+    resetCombo(){
+        this.currentLetterIndex = 0
+        for(let letterText of this.letterTexts){
+            letterText.setStyle(this.config)
+            // restore any visual transforms from completion animation
+            letterText.setScale(1)
+            letterText.setAlpha(1)
+        }
+    }
+
+    // complete animation, then callback
+    wordComplete(){
+        //https://phaser.io/examples/v3.85.0/tweens/view/multiple-delayed-properties and others
+        this.scene.tweens.add({
+            targets: this.letterTexts,
+            scaleX: 1.4,
+            scaleY: 1.4,
+            alpha: 0.6,
+            duration: 220,
+            delay: (target, key, value, index) => index * 60,
+            yoyo: true,
+            ease: 'Sine.inOut',
+            onComplete: () => {
+                this.onCompleteCallback()
+            }
+        })
+    }
+
+}
