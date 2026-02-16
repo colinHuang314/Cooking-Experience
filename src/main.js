@@ -1,0 +1,35 @@
+/*
+Name: Colin Huang
+
+Title: Cooking Experience
+
+Time Tracked (total: incomplete):
+    - took some structure from Endless Runner, added proof of concept for typing input and text animation (60 min)
+*/
+
+config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    render: {
+        antialias: true,
+    },
+    scale: {
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+    },
+    scene: [ Load, Menu, Play],
+    fps: {
+        target: 60,
+        forceSetTimeOut: true
+    }
+
+}
+
+let game = new Phaser.Game(config)
+
+let fps = game.config.fps.target
+
+
+/*
+
+*/
