@@ -78,4 +78,10 @@ class WordCombo{
         })
     }
 
+    destroy(){
+        for(let letterText of this.letterTexts){
+            letterText.destroy()
+        }
+    }
+
 }

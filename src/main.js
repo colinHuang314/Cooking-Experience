@@ -4,8 +4,9 @@ Name: Colin Huang
 Title: Cooking Experience
 
 Time Tracked (total: incomplete):
-    - took some structure from Endless Runner, added proof of concept for typing input and text animation (60 min)
-    - experiment with different fonts, made class to handle typing combos (text and input), added nice animations to the text (120 min)
+    - took some structure from Endless Runner, added proof of concept for typing input and text animation (60 min) 2/15/26
+    - experiment with different fonts, made class to handle typing combos (text and input), added nice animations to the text, experimented with more animations (150 min) 2/16/26
+
 */
 
 config = {

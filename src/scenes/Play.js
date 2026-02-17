@@ -7,6 +7,8 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+        this.cameras.main.setBackgroundColor('#D6B687')
+        this.cameras.main.fadeIn(900);
 
     }
 
