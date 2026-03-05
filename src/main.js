@@ -19,7 +19,7 @@ config = {
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: [ Load, Menu, Play],
+    scene: [ Load, Menu, Cabinet, ItemsPanel ],// item panel on top
     fps: {
         target: 60,
         forceSetTimeOut: true
@@ -30,8 +30,3 @@ config = {
 let game = new Phaser.Game(config)
 
 let fps = game.config.fps.target
-
-
-/*
-
-*/

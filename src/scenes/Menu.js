@@ -9,6 +9,7 @@ class Menu extends Phaser.Scene{
     create(){
         // background
         this.cameras.main.setBackgroundColor('#D6B687')
+        this.cameras.main.fadeIn(900);
 
         // text configs
         let titleConfig = {
@@ -58,58 +59,12 @@ class Menu extends Phaser.Scene{
             },
         }
         
-        
-        const startComboTextConfig = {
-            fontFamily: 'Monospace',
-            fontSize: '45px',
-            color: '#146aff',
-            align: 'center',
-            fontStyle: 'bold',
-            stroke: '#c1e0ff',
-            strokeThickness: 2,
-            shadow: {
-                offsetX: 0,
-                offsetY: 4,
-                color: '#146aff',
-                blur: 25,
-                stroke: true,
-                fill: true
-            },
-            padding: {
-                left: 30,
-                right: 30,
-                top: 30,
-                bottom: 30,
-            },
 
-        }
-        const startComboTextHighlightedConfig = {
-            fontFamily: 'Monospace',
-            fontSize: '50px',
-            color: '#9514ff',
-            align: 'center',
-            fontStyle: 'bold',
-            stroke: '#ffffff',
-            strokeThickness: 5,
-            shadow: {
-                offsetX: 0,
-                offsetY: 4,
-                color: '#9d14ff',
-                blur: 25,
-                stroke: false,
-                fill: true
-            },
-            padding: {
-                left: 30,
-                right: 30,
-                top: 30,
-                bottom: 30,
-            },
+        // add sprites
+        this.pot = this.add.image(300, 400, 'pot').setOrigin(0.5)
+        this.apple = this.add.image(300, 300, 'apple').setOrigin(0.5)
 
-        }
-
-        // add circle
-        this.apple = this.add.circle(300, 300, 15, 0xFF0000).setOrigin(0.5)
+        //this.add.rectangle(300,400, 200, 120, 0x000000).setOrigin(0.5)
 
         // display menu text
         // title
@@ -119,20 +74,18 @@ class Menu extends Phaser.Scene{
         this.add.text(game.config.width/2, 150, 'Type                to begin', instructionsConfig).setOrigin(0.5)
 
         // start combo text (coords are manually tuned)
-        const startComboText = new WordCombo(this, 325, 149, 'Start', startComboTextConfig, startComboTextHighlightedConfig, () => {
+        const startComboText = new WordCombo(this, 325, 149, 'Start', null, null, null, () => {
             this.time.delayedCall(250, () => {
-                // wait before switching to play
-                // this.cameras.main.fadeOut(900);
-                // this.time.delayedCall(900, () => {
-                //     this.scene.start('playScene')
-                // })
-
-                startComboText.destroy()
-
-                this.pickupAnimation(this.apple)
-
+                //wait before switching to play
+                this.cameras.main.fadeOut(900);
+                this.time.delayedCall(900, () => {
+                    this.scene.start('cabinetScene')
+                })
             })
         })
+
+    
+    
         
         
     }
@@ -141,20 +94,4 @@ class Menu extends Phaser.Scene{
         
     }
 
-    pickupAnimation(apple){
-        //https://phaser.io/examples/v3.85.0/tweens/view/multiple-targets-multiple-properties
-        this.tweens.add({
-            targets: this.apple,
-            props: {
-                x: {value: 400, duration: 1500, ease: 'linear'},
-                y: {value: game.config.height + 100, duration: 1500, ease: 'Back.easeInOut'},
-                scaleX: {value: 1.5, duration: 1500, ease: 'Power2'},
-                scaleY: {value: 1.5, duration: 1500, ease: 'Power2'},
-                alpha: {value: 0, duration: 2000, ease: 'linear'},
-            },
-            onComplete: () => {
-                console.log('apple animation complete')
-            }
-        })
-    }
 }

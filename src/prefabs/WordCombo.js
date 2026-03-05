@@ -1,18 +1,65 @@
 class WordCombo{
-    constructor(scene, x, y, word, config, highlightedConfig, onCompleteCallback){
+    constructor(scene, x, y, word, config, highlightedConfig, size, onCompleteCallback){
         this.scene = scene
         this.word = word
-        this.config = config
-        this.highlightedConfig = highlightedConfig
+        this.size = size ? size + 'px' : '45px'
+        this.highlightedSize = size ? (size + 5) + 'px' : '50px'
+        this.config = config !== null ? config : {
+            fontFamily: 'Monospace',
+            fontSize: this.size,
+            color: '#146aff',
+            align: 'center',
+            fontStyle: 'bold',
+            stroke: '#c1e0ff',
+            strokeThickness: 2,
+            shadow: {
+                offsetX: 0,
+                offsetY: 4,
+                color: '#146aff',
+                blur: 25,
+                stroke: true,
+                fill: true
+            },
+            padding: {
+                left: 30,
+                right: 30,
+                top: 30,
+                bottom: 30,
+            },
+        }
+        this.highlightedConfig = highlightedConfig !== null ? highlightedConfig : {
+            fontFamily: 'Monospace',
+            fontSize: this.highlightedSize,
+            color: '#9514ff',
+            align: 'center',
+            fontStyle: 'bold',
+            stroke: '#ffffff',
+            strokeThickness: 5,
+            shadow: {
+                offsetX: 0,
+                offsetY: 4,
+                color: '#9d14ff',
+                blur: 25,
+                stroke: false,
+                fill: true
+            },
+            padding: {
+                left: 30,
+                right: 30,
+                top: 30,
+                bottom: 30,
+            },
+        }
+        
         this.letterTexts = []
         this.currentLetterIndex = 0
         this.onCompleteCallback = onCompleteCallback
 
         // create text objects for each letter in the word
         for(let i = 0; i < word.length; i++){
-            let letterSpacing = 0.55 * config.fontSize.slice(0, 2)
+            let letterSpacing = 0.55 * this.config.fontSize.slice(0, 2)
             let letter = word[i]
-            let letterText = scene.add.text(x + i * letterSpacing, y, letter, config).setOrigin(0.5)
+            let letterText = scene.add.text(x + i * letterSpacing, y, letter, this.config).setOrigin(0.5)
 
             // floating animation (phaser examples)
             scene.tweens.add({
@@ -79,9 +126,17 @@ class WordCombo{
     }
 
     destroy(){
-        for(let letterText of this.letterTexts){
-            letterText.destroy()
-        }
+        this.scene.tweens.add({
+            targets: this.letterTexts,
+            alpha: 0,
+            duration: 500,
+            ease: 'Linear',
+        })
+        this.scene.time.delayedCall(500, () => {
+            for(let letterText of this.letterTexts){
+                letterText.destroy()
+            }
+        })
     }
 
 }

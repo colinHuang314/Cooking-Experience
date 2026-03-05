@@ -21,7 +21,8 @@ class Load extends Phaser.Scene {
         
 
         // load sprites
-        //this.load.image('player', './assets/playerSprite.png')
+        this.load.image('apple', './assets/images/apple.png')
+        this.load.image('pot', './assets/images/pot.png')
     }
 
     create() {
