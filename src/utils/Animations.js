@@ -23,6 +23,9 @@ class Animations{
     }
 
     messageAnimation(messageText, time, callback){
+        if (messageText.y < 650) {
+            messageText.setY(650)
+        }
         this.scene.tweens.add({
             targets: messageText,
             y: 550,

@@ -1,6 +1,9 @@
 class WordCombo{
     constructor(scene, x, y, word, config, highlightedConfig, size, onCompleteCallback){
         this.scene = scene
+        // calculate centering based on word length and font size (default 45px)
+        this.x = x - (word.length - 1) * 0.55 * (size ? size : 45) / 2
+        this.y = y
         this.word = word
         this.size = size ? size + 'px' : '45px'
         this.highlightedSize = size ? (size + 5) + 'px' : '50px'
@@ -59,7 +62,7 @@ class WordCombo{
         for(let i = 0; i < word.length; i++){
             let letterSpacing = 0.55 * this.config.fontSize.slice(0, 2)
             let letter = word[i]
-            let letterText = scene.add.text(x + i * letterSpacing, y, letter, this.config).setOrigin(0.5)
+            let letterText = scene.add.text(this.x + i * letterSpacing, this.y, letter, this.config).setOrigin(0.5)
 
             // floating animation (phaser examples)
             scene.tweens.add({
@@ -81,6 +84,9 @@ class WordCombo{
             }
 
             // match letter
+            if(event.key === "Shift"){
+                return
+            }
             if(event.key.toLowerCase() === this.word[this.currentLetterIndex].toLowerCase()){
                 this.letterTexts[this.currentLetterIndex].setStyle(this.highlightedConfig) // highlight letter
                 this.currentLetterIndex++

@@ -61,8 +61,8 @@ class Menu extends Phaser.Scene{
         
 
         // add sprites
-        this.pot = this.add.image(300, 400, 'pot').setOrigin(0.5)
-        this.apple = this.add.image(300, 300, 'apple').setOrigin(0.5)
+        // this.pot = this.add.image(300, 400, 'pot').setOrigin(0.5)
+        // this.apple = this.add.image(300, 300, 'apple').setOrigin(0.5)
 
         //this.add.rectangle(300,400, 200, 120, 0x000000).setOrigin(0.5)
 
@@ -71,15 +71,42 @@ class Menu extends Phaser.Scene{
         this.add.text(game.config.width/2, 60, 'Cooking at Manzanita', titleConfig).setOrigin(0.5)
 
         // instructions
-        this.add.text(game.config.width/2, 150, 'Type                to begin', instructionsConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, 150, 'Welcome to the kitchen!', instructionsConfig).setOrigin(0.5)
 
         // start combo text (coords are manually tuned)
-        const startComboText = new WordCombo(this, 325, 149, 'Start', null, null, null, () => {
+        const cabinetComboText = new WordCombo(this, 700, 370, 'Cabinet', null, null, null, () => {
             this.time.delayedCall(250, () => {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900);
                 this.time.delayedCall(900, () => {
                     this.scene.start('cabinetScene')
+                })
+            })
+        })
+        const stoveComboText = new WordCombo(this, 400, 220, 'Stove', null, null, null, () => {
+            this.time.delayedCall(250, () => {
+                //wait before switching to play
+                this.cameras.main.fadeOut(900);
+                this.time.delayedCall(900, () => {
+                    this.scene.start('stoveScene')
+                })
+            })
+        })
+        const fridgeComboText = new WordCombo(this, 100, 370, 'Fridge', null, null, null, () => {
+            this.time.delayedCall(250, () => {
+                //wait before switching to play
+                this.cameras.main.fadeOut(900);
+                this.time.delayedCall(900, () => {
+                    this.scene.start('fridgeScene')
+                })
+            })
+        })
+        const counterComboText = new WordCombo(this, 400, 570, 'Counter', null, null, null, () => {
+            this.time.delayedCall(250, () => {
+                //wait before switching to play
+                this.cameras.main.fadeOut(900);
+                this.time.delayedCall(900, () => {
+                    this.scene.start('counterScene')
                 })
             })
         })

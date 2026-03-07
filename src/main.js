@@ -9,6 +9,7 @@ Time Tracked (total: incomplete):
 
 */
 
+
 config = {
     type: Phaser.AUTO,
     width: 800,
@@ -19,7 +20,7 @@ config = {
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: [ Load, Menu, Cabinet, ItemsPanel ],// item panel on top
+    scene: [ Load, Menu, Instructions, Cabinet, ItemsPanel ],// item panel on top
     fps: {
         target: 60,
         forceSetTimeOut: true
@@ -28,5 +29,8 @@ config = {
 }
 
 let game = new Phaser.Game(config)
+
+let width = game.config.width
+let height = game.config.height
 
 let fps = game.config.fps.target
