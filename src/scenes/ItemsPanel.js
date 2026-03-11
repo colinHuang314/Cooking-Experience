@@ -42,3 +42,17 @@ class ItemsPanel extends Phaser.Scene {
         })
     }
 }
+
+/*
+At counter:
+only garlic, carrot, tomato can be cut
+
+At pot:
+cant put garlic carrot tomato in without cutting
+
+once you put one sliced food, one meat(or noodle), one seasoning you can now "stir" and "wait"
+
+once you stir and wait once each you have option to "done" -> goes to conclusion
+
+
+*/

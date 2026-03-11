@@ -18,6 +18,27 @@ class Menu extends Phaser.Scene{
         this.add.image(0, 0, 'kitchen').setOrigin(0, 0)
 
 
+        let skipCombo = this.input.keyboard.createCombo('skip', {
+            resetOnWrongKey: true,
+            maxKeyDelay: 0,
+        })
+        this.input.keyboard.on('keycombomatch', (combo, event) => {
+            if (combo === skipCombo) {
+                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'chicken').setOrigin(0.5), "chicken")
+                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'chili').setOrigin(0.5), "chili")
+                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'groundBeef').setOrigin(0.5), "groundBeef")
+                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'noodles').setOrigin(0.5), "noodles")
+                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'pepper').setOrigin(0.5), "pepper")
+                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'salt').setOrigin(0.5), "salt")
+                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'slicedCarrot').setOrigin(0.5), "slicedCarrot")
+                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'slicedGarlic').setOrigin(0.5), "slicedGarlic")
+                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'slicedTomato').setOrigin(0.5), "slicedTomato")
+                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'soySauce').setOrigin(0.5), "soySauce")
+                this.scene.switch('stoveScene')
+                itemsPanel.cameras.main.setVisible(true)
+            }   
+        })
+
         // text configs
         let titleConfig = {
             fontFamily: 'Helvetica',

@@ -80,7 +80,7 @@ class Fridge extends Phaser.Scene {
                 this.chicken.destroy()
             })
             this.message.destroy()
-            this.message = this.add.text(325, 650, 'Chicken is good meat.').setOrigin(0.5).setFontSize(20).setLineSpacing(12)
+            this.message = this.add.text(325, 650, 'Chicken is harder for me to make.').setOrigin(0.5).setFontSize(20).setLineSpacing(12)
             this.animations.messageAnimation(this.message, 4000, () => {
                 this.message.setAlpha(1)
                 this.message.setY(650)
@@ -110,7 +110,7 @@ class Fridge extends Phaser.Scene {
                 this.carrot.destroy()
             })
             this.message.destroy()
-            this.message = this.add.text(325, 650, 'Carrots are tasty and add crunch.').setOrigin(0.5).setFontSize(20).setLineSpacing(12)
+            this.message = this.add.text(325, 650, 'Carrots are tasty and add crunch...\nI also need to eat more veggies. ').setOrigin(0.5).setFontSize(20).setLineSpacing(12)
             this.animations.messageAnimation(this.message, 4000, () => {
                 this.message.setAlpha(1)
                 this.message.setY(650)
@@ -125,7 +125,7 @@ class Fridge extends Phaser.Scene {
                 this.tomato.destroy()
             })
             this.message.destroy()
-            this.message = this.add.text(325, 650, 'Maybe I want a tomato?').setOrigin(0.5).setFontSize(20).setLineSpacing(12)
+            this.message = this.add.text(325, 650, 'Maybe I want a tomato? Sometimes I eat them raw.').setOrigin(0.5).setFontSize(20).setLineSpacing(12)
             this.animations.messageAnimation(this.message, 4000, () => {
                 this.message.setAlpha(1)
                 this.message.setY(650)

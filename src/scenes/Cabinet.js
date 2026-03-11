@@ -94,7 +94,7 @@ class Cabinet extends Phaser.Scene {
                 this.salt.destroy()
             })
             this.message.destroy()
-            this.message = this.add.text(325, 650, "You got salt! This is used a lot.").setOrigin(0.5).setFontSize(20).setLineSpacing(12)
+            this.message = this.add.text(325, 650, "You got salt! I use this in almost everything").setOrigin(0.5).setFontSize(20).setLineSpacing(12)
             this.animations.messageAnimation(this.message, 4000, () => {
                 this.message.setAlpha(1)
                 this.message.setY(650)
@@ -109,7 +109,7 @@ class Cabinet extends Phaser.Scene {
                 this.pepper.destroy()
             })
             this.message.destroy()
-            this.message = this.add.text(325, 650, "Pepper! I might use this from time to time.").setOrigin(0.5).setFontSize(20).setLineSpacing(12)
+            this.message = this.add.text(325, 650, "Pepper! I might use this from time to time\n if something tastes bland.").setOrigin(0.5).setFontSize(20).setLineSpacing(12)
             this.animations.messageAnimation(this.message, 4000, () => {
                 this.message.setAlpha(1)
                 this.message.setY(650)
@@ -139,7 +139,7 @@ class Cabinet extends Phaser.Scene {
                 this.garlic.destroy()
             })
             this.message.destroy()
-            this.message = this.add.text(325, 650, "Garlic! Great seasoning for almost anything.").setOrigin(0.5).setFontSize(20).setLineSpacing(12)
+            this.message = this.add.text(325, 650, "Garlic! A good flavor for most things.").setOrigin(0.5).setFontSize(20).setLineSpacing(12)
             this.animations.messageAnimation(this.message, 4000, () => {
                 this.message.setAlpha(1)
                 this.message.setY(650)
@@ -154,7 +154,7 @@ class Cabinet extends Phaser.Scene {
                 this.noodles.destroy()
             })
             this.message.destroy()
-            this.message = this.add.text(325, 650, "Noodles are taste good\n and are easy to make").setOrigin(0.5).setFontSize(20).setLineSpacing(12)
+            this.message = this.add.text(325, 650, "Noodles taste good and are easy to make.\n Just gotta wait for the water to boil.").setOrigin(0.5).setFontSize(20).setLineSpacing(12)
             this.animations.messageAnimation(this.message, 4000, () => {
                 this.message.setAlpha(1)
                 this.message.setY(650)
@@ -169,7 +169,7 @@ class Cabinet extends Phaser.Scene {
                 this.soySauce.destroy()
             })
             this.message.destroy()
-            this.message = this.add.text(325, 650, "I started to put soy sauce\n in my meats.").setOrigin(0.5).setFontSize(20).setLineSpacing(12)
+            this.message = this.add.text(325, 650, "I started to put soy sauce\n in my food recently.").setOrigin(0.5).setFontSize(20).setLineSpacing(12)
             this.animations.messageAnimation(this.message, 4000, () => {
                 this.message.setAlpha(1)
                 this.message.setY(650)

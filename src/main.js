@@ -3,10 +3,16 @@ Name: Colin Huang
 
 Title: Cooking Experience
 
-Time Spent: 20 hrs
+Time Spent: 25 hrs
 
-Notes: type skip during the intro of the game to skip it
+Notes: Type "skip" during the intro of the game to skip it, type "skip" in the menu to get all items and go to the stove scene
 
+Citations:
+https://rexrainbow.github.io/phaser3-rex-notes/docs/site/loader/
+https://www.w3schools.com/jsref/jsref_filter.asp
+https://phaser.io/examples/v3.85.0/tweens/view/multiple-delayed-properties
+https://phaser.io/examples/v3.85.0/tweens/view/multiple-targets-multiple-properties
+Prof. Altice
 */
 
 
