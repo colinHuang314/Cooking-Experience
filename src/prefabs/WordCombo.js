@@ -5,8 +5,9 @@ class WordCombo{
         this.x = x - (word.length - 1) * 0.55 * (size ? size : 45) / 2
         this.y = y
         this.word = word
-        this.size = size ? size + 'px' : '45px'
+        this.size = size ? size + 'px' :
         this.highlightedSize = size ? (size + 5) + 'px' : '50px'
+
         this.config = config !== null ? config : {
             fontFamily: 'Monospace',
             fontSize: this.size,
@@ -58,6 +59,7 @@ class WordCombo{
         this.currentLetterIndex = 0
         this.onCompleteCallback = onCompleteCallback
 
+        this.destroyed = false
         // create text objects for each letter in the word
         for(let i = 0; i < word.length; i++){
             let letterSpacing = 0.55 * this.config.fontSize.slice(0, 2)
@@ -83,12 +85,17 @@ class WordCombo{
                 return
             }
 
+            // fixed error where it tried to refrence destroyed (null) 
+            if (this.destroyed) return
+
             // match letter
             if(event.key === "Shift"){
                 return
             }
             if(event.key.toLowerCase() === this.word[this.currentLetterIndex].toLowerCase()){
-                this.letterTexts[this.currentLetterIndex].setStyle(this.highlightedConfig) // highlight letter
+                const letterText = this.letterTexts[this.currentLetterIndex]
+                letterText.setStyle(this.highlightedConfig)
+
                 this.currentLetterIndex++
 
                 // word fully typed
@@ -106,6 +113,9 @@ class WordCombo{
     resetCombo(){
         this.currentLetterIndex = 0
         for(let letterText of this.letterTexts){
+            if (this.destroyed) {
+                continue
+            }
             letterText.setStyle(this.config)
             // restore any visual transforms from completion animation
             letterText.setScale(1)
@@ -127,6 +137,10 @@ class WordCombo{
             ease: 'Sine.inOut',
             onComplete: () => {
                 this.onCompleteCallback()
+
+                this.scene.time.delayedCall(1200, () => {
+                    this.resetCombo()
+                })
             }
         })
     }
@@ -142,6 +156,7 @@ class WordCombo{
             for(let letterText of this.letterTexts){
                 letterText.destroy()
             }
+            this.destroyed = true
         })
     }
 

@@ -9,7 +9,14 @@ class Menu extends Phaser.Scene{
     create(){
         // background
         this.cameras.main.setBackgroundColor('#D6B687')
-        this.cameras.main.fadeIn(900);
+        this.cameras.main.fadeIn(900)
+        this.events.on('wake', () => {
+            this.cameras.main.fadeIn(900)
+        })
+
+        // bg
+        this.add.image(0, 0, 'kitchen').setOrigin(0, 0)
+
 
         // text configs
         let titleConfig = {
@@ -68,51 +75,65 @@ class Menu extends Phaser.Scene{
 
         // display menu text
         // title
-        this.add.text(game.config.width/2, 60, 'Cooking at Manzanita', titleConfig).setOrigin(0.5)
+        // this.add.text(game.config.width/2, 40, 'Cooking at Manzanita', titleConfig).setOrigin(0.5)
 
         // instructions
-        this.add.text(game.config.width/2, 150, 'Welcome to the kitchen!', instructionsConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, 40, 'Welcome to the kitchen!', instructionsConfig).setOrigin(0.5)
+        instructionsConfig.color = '#e23de2'
+        instructionsConfig.fontSize = '28px'
+        this.add.text(game.config.width/2, 75, 'Visit each section to learn more, and make a full meal!', instructionsConfig).setOrigin(0.5)
+        // instructionsConfig.color = '#e23de2'
+        // this.add.text(game.config.width/2, 230, 'and make a full meal!', instructionsConfig).setOrigin(0.5)
 
         // start combo text (coords are manually tuned)
-        const cabinetComboText = new WordCombo(this, 700, 370, 'Cabinet', null, null, null, () => {
+        const cabinetComboText = new WordCombo(this, 300, 175, 'Cabinet', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
             this.time.delayedCall(250, () => {
                 //wait before switching to play
-                this.cameras.main.fadeOut(900);
+                this.cameras.main.fadeOut(900)
                 this.time.delayedCall(900, () => {
-                    this.scene.start('cabinetScene')
+                    this.scene.switch('cabinetScene')
+                    itemsPanel.cameras.main.setVisible(true)
+
                 })
             })
         })
-        const stoveComboText = new WordCombo(this, 400, 220, 'Stove', null, null, null, () => {
+        const stoveComboText = new WordCombo(this, 490, 235, 'Stove', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
             this.time.delayedCall(250, () => {
                 //wait before switching to play
-                this.cameras.main.fadeOut(900);
+                this.cameras.main.fadeOut(900)
                 this.time.delayedCall(900, () => {
-                    this.scene.start('stoveScene')
+                    this.scene.switch('stoveScene')
+                    itemsPanel.cameras.main.setVisible(true)
                 })
             })
         })
-        const fridgeComboText = new WordCombo(this, 100, 370, 'Fridge', null, null, null, () => {
+        const fridgeComboText = new WordCombo(this, 140, 300, 'Fridge', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
             this.time.delayedCall(250, () => {
                 //wait before switching to play
-                this.cameras.main.fadeOut(900);
+                this.cameras.main.fadeOut(900)
                 this.time.delayedCall(900, () => {
-                    this.scene.start('fridgeScene')
+                    this.scene.switch('fridgeScene')
+                    itemsPanel.cameras.main.setVisible(true)
                 })
             })
         })
-        const counterComboText = new WordCombo(this, 400, 570, 'Counter', null, null, null, () => {
+        const counterComboText = new WordCombo(this, 690, 320, 'Counter', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
             this.time.delayedCall(250, () => {
                 //wait before switching to play
-                this.cameras.main.fadeOut(900);
+                this.cameras.main.fadeOut(900)
                 this.time.delayedCall(900, () => {
-                    this.scene.start('counterScene')
+                    this.scene.switch('counterScene')
+                    itemsPanel.cameras.main.setVisible(true)
                 })
             })
         })
 
     
     
+        this.input.on('pointerdown', (pointer) => {
+            console.log(`menu Pointer down at (${pointer.x}, ${pointer.y})`)
+        })
+
         
         
     }

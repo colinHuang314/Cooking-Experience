@@ -3,9 +3,9 @@ Name: Colin Huang
 
 Title: Cooking Experience
 
-Time Tracked (total: incomplete):
-    - took some structure from Endless Runner, added proof of concept for typing input and text animation (60 min) 2/15/26
-    - experiment with different fonts, made class to handle typing combos (text and input), added nice animations to the text, experimented with more animations (150 min) 2/16/26
+Time Spent: 20 hrs
+
+Notes: type skip during the intro of the game to skip it
 
 */
 
@@ -20,7 +20,7 @@ config = {
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: [ Load, Menu, Instructions, Cabinet, ItemsPanel ],// item panel on top
+    scene: [ Load, Instructions, Menu, Fridge, Cabinet, Stove, Counter, ItemsPanel],
     fps: {
         target: 60,
         forceSetTimeOut: true
@@ -34,3 +34,75 @@ let width = game.config.width
 let height = game.config.height
 
 let fps = game.config.fps.target
+
+let defaultTextConfig = {
+    fontFamily: 'Monospace',
+    fontSize: '45px',
+    color: '#146aff',
+    align: 'center',
+    fontStyle: 'bold',
+    stroke: '#c1e0ff',
+    strokeThickness: 2,
+    shadow: {
+        offsetX: 0,
+        offsetY: 4,
+        color: '#146aff',
+        blur: 25,
+        stroke: true,
+        fill: true
+    },
+    padding: {
+        left: 30,
+        right: 30,
+        top: 30,
+        bottom: 30,
+    },
+}
+let defaultTextHighlightedConfig = {
+    fontFamily: 'Monospace',
+    fontSize: '50px',
+    color: '#9514ff',
+    align: 'center',
+    fontStyle: 'bold',
+    stroke: '#ffffff',
+    strokeThickness: 5,
+    shadow: {
+        offsetX: 0,
+        offsetY: 4,
+        color: '#9d14ff',
+        blur: 25,
+        stroke: false,
+        fill: true
+    },
+    padding: {
+        left: 30,
+        right: 30,
+        top: 30,
+        bottom: 30,
+    },
+}
+
+// scenes
+let itemsPanel = null
+let fridgeScene = null
+let cabinetScene = null
+let stoveScene = null
+let counterScene = null
+let menuScene = null
+
+
+// wordcombo text configs
+let itemTextConfig = { 
+    ...defaultTextConfig, color: '#048e3b', fontSize: '30px',
+    shadow: { ...defaultTextHighlightedConfig.shadow, color: '#048e3b' } 
+}
+let itemTextHighlightedConfig = { 
+    ...defaultTextHighlightedConfig, color: '#00e135', fontSize: '34px',
+    shadow: { ...defaultTextHighlightedConfig.shadow, color: '#00c64f' } 
+}
+let menuTextConfig = { 
+    ...defaultTextConfig, fontSize: '28px',
+} 
+let menuTextHighlightedConfig = { 
+    ...defaultTextHighlightedConfig, fontSize: '32px',
+}

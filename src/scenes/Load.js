@@ -16,13 +16,29 @@ class Load extends Phaser.Scene {
             loadingBar.destroy()
         })
 
+        // get panel ready
+        this.scene.launch('itemsPanelScene')
+        itemsPanel = this.scene.get("itemsPanelScene")
+        itemsPanel.cameras.main.setVisible(false)
+
         // audio
-        //this.load.audio('music', './assets/bg-music.mp3')
-        
+        this.load.audio('music', './assets/sound/music.mp3')
 
         // load sprites
+        //scenes
+        this.load.image('cabinet', './assets/images/cabinetScene.png')
+        this.load.image('fridge', './assets/images/fridgeScene.png')
+        this.load.image('stove', './assets/images/stoveScene.png')
+        this.load.image('counter', './assets/images/counterScene.png')
+        this.load.image('kitchen', './assets/images/kitchen.png')
+
+        // items
         this.load.image('apple', './assets/images/apple.png')
         this.load.image('pot', './assets/images/pot.png')
+        this.load.image('salt', './assets/images/salt.png')
+        this.load.image('saltParticle', './assets/images/saltParticle.png')
+        this.load.image('pepper', './assets/images/pepper.png') 
+        this.load.image('chili', './assets/images/chili.png')
     }
 
     create() {

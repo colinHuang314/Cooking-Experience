@@ -41,7 +41,7 @@ class Instructions extends Phaser.Scene {
         })
         this.input.keyboard.on('keycombomatch', (combo, event) => {
             if (combo === skipCombo) {
-                this.scene.start('menuScene')
+                this.scene.switch('menuScene')
             }   
         })
     }
@@ -91,6 +91,10 @@ class Instructions extends Phaser.Scene {
     createCombo(index) {
         const label = this.comboWords[index]
         this.textObjects.combo = new WordCombo(this, width / 2, height / 2 + 120, label, null, null, null, () => {
+                // audio on first key press
+                if (index == 1) {
+                    this.sound.play('music', { loop: true })
+                }
                 // fade out the main message when typed
                 this.tweens.add({
                     targets: this.textObjects.main,
@@ -105,7 +109,7 @@ class Instructions extends Phaser.Scene {
                             // last message
                             this.cameras.main.fadeOut(900)
                             this.time.delayedCall(500, () => {
-                                this.scene.start('menuScene')
+                                this.scene.switch('menuScene')
                             })
                         }
                     }
