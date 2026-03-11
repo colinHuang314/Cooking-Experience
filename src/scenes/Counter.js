@@ -22,14 +22,9 @@ class Counter extends Phaser.Scene {
 
         // message box
         this.add.rectangle(0, 500, 620, 100, 0x000000, 0.8).setOrigin(0, 0)
-        
-        // item panel
-        // this.scene.wake('itemsPanelScene')
-
-
+      
         // sprites
-        // this.salt = this.add.image(476, 295, 'salt').setOrigin(0.5)
-
+        this.knife = this.add.image(350, 280, 'knife').setOrigin(0.5)
 
         this.message = this.add.text(325, 650, 'The counter is usually filled with\n random stuff and is messy!').setOrigin(0.5).setFontSize(20).setLineSpacing(12)
 
@@ -67,7 +62,7 @@ class Counter extends Phaser.Scene {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)
                 this.time.delayedCall(900, () => {
-                    this.scene.start('menuScene')
+                    this.scene.switch('menuScene')
                     itemsPanel.cameras.main.setVisible(false)
                 })
             })

@@ -19,17 +19,14 @@ class Fridge extends Phaser.Scene {
         // background
         this.add.image(0, 0, 'fridge').setOrigin(0, 0)
         
-
         // message box
         this.add.rectangle(0, 500, 620, 100, 0x000000, 0.8).setOrigin(0, 0)
-        
-        // item panel
-        // this.scene.wake('itemsPanelScene')
-
 
         // sprites
-        // this.salt = this.add.image(476, 295, 'salt').setOrigin(0.5)
-
+        this.chicken = this.add.image(296, 322, 'chicken').setOrigin(0.5)
+        this.groundBeef = this.add.image(425, 237, 'groundBeef').setOrigin(0.5)
+        this.carrot = this.add.image(418, 437, 'carrot').setOrigin(0.5)
+        this.tomato = this.add.image(550, 335, 'tomato').setOrigin(0.5)
 
         this.message = this.add.text(325, 650, 'The fridge is usually packed with food\n from costco!').setOrigin(0.5).setFontSize(20).setLineSpacing(12)
 
@@ -67,27 +64,73 @@ class Fridge extends Phaser.Scene {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)
                 this.time.delayedCall(900, () => {
-                    this.scene.start('menuScene')
+                    this.scene.switch('menuScene')
                     itemsPanel.cameras.main.setVisible(false)
                 })
             })
         })
 
         // items
-        // let saltComboText = new WordCombo(this, 476, 335, 'Salt', itemTextConfig, itemTextHighlightedConfig, 30, () => {
-        //     saltComboText.destroy()
-        //     this.animations.pickupAnimation(this.salt, 700, 450,() => {
-        //         const salt = this.itemsPanel.add.image(310, 310, 'salt').setOrigin(0.5)
-        //         this.itemsPanel.addItem(salt, "salt")
-        //     })
-        //     this.message.destroy()
-        //     this.message = this.add.text(325, 650, "You got salt! This is used a lot.").setOrigin(0.5).setFontSize(20).setLineSpacing(12)
-        //     this.animations.messageAnimation(this.message, 4000, () => {
-        //         this.message.setAlpha(1)
-        //         this.message.setY(650)
-        //     })
-        // })
-        
+        let chickenComboText = new WordCombo(this, 296, 360, 'Chicken', itemTextConfig, itemTextHighlightedConfig, 30, () => {
+            chickenComboText.destroy()
+            const [tweenX, tweenY] = itemsPanel.getPosition(itemsPanel.items.length)
+            this.animations.pickupAnimation(this.chicken, tweenX, tweenY, () => {
+                const chicken = itemsPanel.add.image(310, 310, 'chicken').setOrigin(0.5)
+                itemsPanel.addItem(chicken, 'chicken')
+                this.chicken.destroy()
+            })
+            this.message.destroy()
+            this.message = this.add.text(325, 650, 'Chicken is good meat.').setOrigin(0.5).setFontSize(20).setLineSpacing(12)
+            this.animations.messageAnimation(this.message, 4000, () => {
+                this.message.setAlpha(1)
+                this.message.setY(650)
+            })
+        })
+        let groundBeefComboText = new WordCombo(this, 425, 267, 'Ground Beef', itemTextConfig, itemTextHighlightedConfig, 30, () => {
+            groundBeefComboText.destroy()
+            const [tweenX, tweenY] = itemsPanel.getPosition(itemsPanel.items.length)
+            this.animations.pickupAnimation(this.groundBeef, tweenX, tweenY, () => {
+                const groundBeef = itemsPanel.add.image(310, 310, 'groundBeef').setOrigin(0.5)
+                itemsPanel.addItem(groundBeef, 'groundBeef')
+                this.groundBeef.destroy()
+            })
+            this.message.destroy()
+            this.message = this.add.text(325, 650, 'Ground beef is easy to make.').setOrigin(0.5).setFontSize(20).setLineSpacing(12)
+            this.animations.messageAnimation(this.message, 4000, () => {
+                this.message.setAlpha(1)
+                this.message.setY(650)
+            })
+        })
+        let carrotComboText = new WordCombo(this, 418, 405, 'Carrot', itemTextConfig, itemTextHighlightedConfig, 30, () => {
+            carrotComboText.destroy()
+            const [tweenX, tweenY] = itemsPanel.getPosition(itemsPanel.items.length)
+            this.animations.pickupAnimation(this.carrot, tweenX, tweenY, () => {
+                const carrot = itemsPanel.add.image(310, 310, 'carrot').setOrigin(0.5)
+                itemsPanel.addItem(carrot, 'carrot')
+                this.carrot.destroy()
+            })
+            this.message.destroy()
+            this.message = this.add.text(325, 650, 'Carrots are tasty and add crunch.').setOrigin(0.5).setFontSize(20).setLineSpacing(12)
+            this.animations.messageAnimation(this.message, 4000, () => {
+                this.message.setAlpha(1)
+                this.message.setY(650)
+            })
+        })
+        let tomatoComboText = new WordCombo(this, 550, 305, 'Tomato', itemTextConfig, itemTextHighlightedConfig, 30, () => {
+            tomatoComboText.destroy()
+            const [tweenX, tweenY] = itemsPanel.getPosition(itemsPanel.items.length)
+            this.animations.pickupAnimation(this.tomato, tweenX, tweenY, () => {
+                const tomato = itemsPanel.add.image(310, 310, 'tomato').setOrigin(0.5)
+                itemsPanel.addItem(tomato, 'tomato')
+                this.tomato.destroy()
+            })
+            this.message.destroy()
+            this.message = this.add.text(325, 650, 'Maybe I want a tomato?').setOrigin(0.5).setFontSize(20).setLineSpacing(12)
+            this.animations.messageAnimation(this.message, 4000, () => {
+                this.message.setAlpha(1)
+                this.message.setY(650)
+            })
+        })
 
         // initial message
         this.animations.messageAnimation(this.message, 10000, () => {

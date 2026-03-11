@@ -10,7 +10,7 @@ class ItemsPanel extends Phaser.Scene {
     create() {
         this.items = []
 
-        this.panel = this.add.rectangle(620, 200, 280, 400, 0xaaaaaa, 0.8).setOrigin(0, 0)
+        this.panel = this.add.rectangle(620, 0, 280, 600, 0xaaaaaa, 0.8).setOrigin(0, 0)
 
         this.draw()
     }
@@ -29,10 +29,15 @@ class ItemsPanel extends Phaser.Scene {
         this.draw()
     }
 
+    getPosition(index){
+        const x = index % 2 === 0 ? 660 : 760
+        const y = 35 + Math.floor(index / 2) * 100
+        return [x, y]
+    }
+
     draw() {
         this.items.forEach((item, index) => {
-            const x = index % 2 === 0 ? 660 : 760
-            const y = 235 + Math.floor(index / 2) * 80
+            let [x, y] = this.getPosition(index)
             item.item.setPosition(x, y)
         })
     }

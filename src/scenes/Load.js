@@ -39,6 +39,17 @@ class Load extends Phaser.Scene {
         this.load.image('saltParticle', './assets/images/saltParticle.png')
         this.load.image('pepper', './assets/images/pepper.png') 
         this.load.image('chili', './assets/images/chili.png')
+        this.load.image('carrot', './assets/images/carrot.png')
+        this.load.image('chicken', './assets/images/chicken.png')
+        this.load.image('garlic', './assets/images/garlic.png')
+        this.load.image('groundBeef', './assets/images/groundBeef.png')
+        this.load.image('noodles', './assets/images/noodles.png')
+        this.load.image('slicedCarrot', './assets/images/slicedCarrot.png')
+        this.load.image('slicedGarlic', './assets/images/slicedGarlic.png')
+        this.load.image('slicedTomato', './assets/images/slicedTomato.png')
+        this.load.image('soySauce', './assets/images/soySauce.png')
+        this.load.image('tomato', './assets/images/tomato.png')
+        this.load.image('knife', './assets/images/knife.png')
     }
 
     create() {

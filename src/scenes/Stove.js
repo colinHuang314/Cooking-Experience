@@ -28,7 +28,7 @@ class Stove extends Phaser.Scene {
 
 
         // sprites
-        // this.salt = this.add.image(476, 295, 'salt').setOrigin(0.5)
+        this.pot = this.add.image(313, 355, 'pot').setOrigin(0.5)
 
 
         this.message = this.add.text(325, 650, 'The stove is often occupied and messy!').setOrigin(0.5).setFontSize(20).setLineSpacing(12)
@@ -67,7 +67,7 @@ class Stove extends Phaser.Scene {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)
                 this.time.delayedCall(900, () => {
-                    this.scene.start('menuScene')
+                    this.scene.switch('menuScene')
                     itemsPanel.cameras.main.setVisible(false)
                 })
             })
