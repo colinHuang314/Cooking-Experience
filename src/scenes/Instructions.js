@@ -10,6 +10,9 @@ class Instructions extends Phaser.Scene {
         this.cameras.main.setBackgroundColor('#000000')
         this.cameras.main.fadeIn(900)
 
+        this.soundPlaying = false
+
+
         this.messageConfig = {
             fontFamily: 'Helvetica',
             fontSize: '40px',
@@ -42,6 +45,10 @@ class Instructions extends Phaser.Scene {
         this.input.keyboard.on('keycombomatch', (combo, event) => {
             if (combo === skipCombo) {
                 this.scene.switch('menuScene')
+                if (! this.soundPlaying){
+                    this.sound.play('music', { loop: true })
+                    this.soundPlaying = true
+                }
             }   
         })
     }
@@ -93,7 +100,10 @@ class Instructions extends Phaser.Scene {
         this.textObjects.combo = new WordCombo(this, width / 2, height / 2 + 120, label, null, null, null, () => {
                 // audio on first key press
                 if (index == 1) {
-                    this.sound.play('music', { loop: true })
+                    if (! this.soundPlaying){
+                        this.sound.play('music', { loop: true })
+                        this.soundPlaying = true
+                    }
                 }
                 // fade out the main message when typed
                 this.tweens.add({

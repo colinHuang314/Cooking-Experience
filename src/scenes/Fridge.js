@@ -90,7 +90,7 @@ class Fridge extends Phaser.Scene {
         
 
         // initial message
-        this.animations.messageAnimation(this.message, 4000, () => {
+        this.animations.messageAnimation(this.message, 10000, () => {
             this.message.setAlpha(1)
             this.message.setY(650)
         })

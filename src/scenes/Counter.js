@@ -43,7 +43,7 @@ class Counter extends Phaser.Scene {
                 })
             })
         })
-        const fridgeComboText = new WordCombo(this, 520, 480, 'Stove', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
+        const fridgeComboText = new WordCombo(this, 530, 480, 'Stove', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
             this.time.delayedCall(250, () => {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)
@@ -90,7 +90,7 @@ class Counter extends Phaser.Scene {
         
 
         // initial message
-        this.animations.messageAnimation(this.message, 4000, () => {
+        this.animations.messageAnimation(this.message, 10000, () => {
             this.message.setAlpha(1)
             this.message.setY(650)
         })

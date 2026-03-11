@@ -34,7 +34,7 @@ class Stove extends Phaser.Scene {
         this.message = this.add.text(325, 650, 'The stove is often occupied and messy!').setOrigin(0.5).setFontSize(20).setLineSpacing(12)
 
         // scene nav
-        const stoveComboText = new WordCombo(this, 320, 480, 'Cabinet', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
+        const stoveComboText = new WordCombo(this, 300, 480, 'Cabinet', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
             this.time.delayedCall(250, () => {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)
@@ -52,7 +52,7 @@ class Stove extends Phaser.Scene {
                 })
             })
         })
-        const counterComboText = new WordCombo(this, 100, 480, 'Fridge', defaultTextConfig, defaultTextHighlightedConfig, null,() => {
+        const counterComboText = new WordCombo(this, 80, 480, 'Fridge', defaultTextConfig, defaultTextHighlightedConfig, null,() => {
             this.time.delayedCall(250, () => {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)
@@ -90,7 +90,7 @@ class Stove extends Phaser.Scene {
         
 
         // initial message
-        this.animations.messageAnimation(this.message, 4000, () => {
+        this.animations.messageAnimation(this.message, 10000, () => {
             this.message.setAlpha(1)
             this.message.setY(650)
         })
