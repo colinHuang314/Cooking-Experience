@@ -26,19 +26,9 @@ class Menu extends Phaser.Scene{
         })
         this.input.keyboard.on('keycombomatch', (combo, event) => {
             if (combo === skipCombo) {
-                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'chicken').setOrigin(0.5), "chicken")
-                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'chili').setOrigin(0.5), "chili")
-                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'groundBeef').setOrigin(0.5), "groundBeef")
-                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'noodles').setOrigin(0.5), "noodles")
-                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'pepper').setOrigin(0.5), "pepper")
-                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'salt').setOrigin(0.5), "salt")
-                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'carrotSliced').setOrigin(0.5), "carrotSliced")
-                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'garlicSliced').setOrigin(0.5), "garlicSliced")
-                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'tomatoSliced').setOrigin(0.5), "tomatoSliced")
-                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'soySauce').setOrigin(0.5), "soySauce")
-                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'carrot').setOrigin(0.5), "carrot")
-                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'garlic').setOrigin(0.5), "garlic")
-                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'tomato').setOrigin(0.5), "tomato")
+                for(const [idx, name] of itemsPanel.skipItemNames.entries()){
+                    itemsPanel.addItem(itemsPanel.add.image(0, 0, name).setOrigin(0.5), name, itemsPanel.skipItemText[idx])
+                }
                 this.scene.switch('stoveScene')
                 itemsPanel.cameras.main.setVisible(true)
             }   

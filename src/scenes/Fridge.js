@@ -76,7 +76,7 @@ class Fridge extends Phaser.Scene {
             const [tweenX, tweenY] = itemsPanel.getPosition(itemsPanel.items.length)
             this.animations.pickupAnimation(this.chicken, tweenX, tweenY, () => {
                 const chicken = itemsPanel.add.image(310, 310, 'chicken').setOrigin(0.5)
-                itemsPanel.addItem(chicken, 'chicken')
+                itemsPanel.addItem(chicken, 'chicken', "Chicken")
                 this.chicken.destroy()
             })
             this.message.destroy()
@@ -91,7 +91,7 @@ class Fridge extends Phaser.Scene {
             const [tweenX, tweenY] = itemsPanel.getPosition(itemsPanel.items.length)
             this.animations.pickupAnimation(this.groundBeef, tweenX, tweenY, () => {
                 const groundBeef = itemsPanel.add.image(310, 310, 'groundBeef').setOrigin(0.5)
-                itemsPanel.addItem(groundBeef, 'groundBeef')
+                itemsPanel.addItem(groundBeef, 'groundBeef', 'Ground Beef')
                 this.groundBeef.destroy()
             })
             this.message.destroy()
@@ -106,7 +106,7 @@ class Fridge extends Phaser.Scene {
             const [tweenX, tweenY] = itemsPanel.getPosition(itemsPanel.items.length)
             this.animations.pickupAnimation(this.carrot, tweenX, tweenY, () => {
                 const carrot = itemsPanel.add.image(310, 310, 'carrot').setOrigin(0.5)
-                itemsPanel.addItem(carrot, 'carrot')
+                itemsPanel.addItem(carrot, 'carrot', 'Carrot')
                 this.carrot.destroy()
             })
             this.message.destroy()
@@ -121,7 +121,7 @@ class Fridge extends Phaser.Scene {
             const [tweenX, tweenY] = itemsPanel.getPosition(itemsPanel.items.length)
             this.animations.pickupAnimation(this.tomato, tweenX, tweenY, () => {
                 const tomato = itemsPanel.add.image(310, 310, 'tomato').setOrigin(0.5)
-                itemsPanel.addItem(tomato, 'tomato')
+                itemsPanel.addItem(tomato, 'tomato', 'Tomato')
                 this.tomato.destroy()
             })
             this.message.destroy()

@@ -27,10 +27,8 @@ Prof. Altice
 
 
 
-
 TODO
-
-flip card for conclusion
+conclusion(flip?)
 replay without reloading
 
 credits(what i made and what i used)
@@ -38,6 +36,9 @@ credits(what i made and what i used)
 5 major components
 
 !!! SOUND
+
+seasoning particles
+pot particles
 
 stove logic and conclusion logic
 */
@@ -140,4 +141,12 @@ let menuTextConfig = {
 } 
 let menuTextHighlightedConfig = { 
     ...defaultTextHighlightedConfig, fontSize: '32px',
+}
+let specialTextConfig = { 
+    ...defaultTextConfig, color: '#cf18c3', fontSize: '28px', stroke: '#450641', strokeThickness: 3,
+    shadow: { ...defaultTextHighlightedConfig.shadow, color: '#cf18c3' } 
+} 
+let specialTextHighlightedConfig = { 
+    ...defaultTextHighlightedConfig, color: '#ff00ee', fontSize: '32px', stroke: '#000000',
+    shadow: { ...defaultTextHighlightedConfig.shadow, color: '#ff00ee' } 
 }

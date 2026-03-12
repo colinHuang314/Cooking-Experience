@@ -10,8 +10,17 @@ class Stove extends Phaser.Scene {
         console.log("stove create")
         this.cameras.main.setBackgroundColor('#D6B687')
         this.cameras.main.fadeIn(900)
+
+        this.wordCombos = []
+        this.itemsInPot = []
+        this.startedCook = false
+
         this.events.on('wake', () => {
             this.cameras.main.fadeIn(900)
+            if(itemsPanel.hasAllIngredients()){
+                this.warningText.destroy()
+            }
+            this.setWordCombos()
         })
 
         this.animations = new Animations(this)
@@ -22,16 +31,46 @@ class Stove extends Phaser.Scene {
 
         // message box
         this.add.rectangle(0, 500, 620, 100, 0x000000, 0.8).setOrigin(0, 0)
-        
-        // item panel
-        // this.scene.wake('itemsPanelScene')
+
+
+        let warningConfig = {
+            fontFamily: 'Helvetica',
+            fontSize: '35px',
+            color: '#0ca946',
+            align: 'center',
+            fontStyle: 'bold',
+            stroke: '#003203',
+            strokeThickness: 3,
+            shadow: {
+                offsetX: 3,
+                offsetY: 3,
+                color: '#000000',
+                blur: 0,
+                stroke: true,
+                fill: true
+            },
+            padding: {
+                left: 10,
+                right: 10,
+                top: 10,
+                bottom: 25,
+            },
+        }
+        // warning message
+        this.warningText = this.add.text(game.config.width/2, 130, 'Collect more ingredients before cooking!', warningConfig).setOrigin(0.5)
+        if(itemsPanel.hasAllIngredients()){
+            this.warningText.destroy()
+        }
+
+     
+        // wordcombos
+        this.setWordCombos()
 
 
         // sprites
         this.pot = this.add.image(313, 355, 'pot').setOrigin(0.5)
 
-
-        this.message = this.add.text(325, 650, 'The stove is often occupied and messy!').setOrigin(0.5).setFontSize(20).setLineSpacing(12)
+        this.message = this.add.text(325, 650, 'Put ingredients together to make a meal!\nDon\'t forget to cut your veggies!').setOrigin(0.5).setFontSize(20).setLineSpacing(12)
 
         // scene nav
         const stoveComboText = new WordCombo(this, 300, 480, 'Cabinet', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
@@ -73,22 +112,6 @@ class Stove extends Phaser.Scene {
             })
         })
 
-        // items
-        // let saltComboText = new WordCombo(this, 476, 335, 'Salt', itemTextConfig, itemTextHighlightedConfig, 30, () => {
-        //     saltComboText.destroy()
-        //     this.animations.pickupAnimation(this.salt, 700, 450,() => {
-        //         const salt = itemsPanel.add.image(310, 310, 'salt').setOrigin(0.5)
-        //         itemsPanel.addItem(salt, "salt")
-        //     })
-        //     this.message.destroy()
-        //     this.message = this.add.text(325, 650, "You got salt! This is used a lot.").setOrigin(0.5).setFontSize(20).setLineSpacing(12)
-        //     this.animations.messageAnimation(this.message, 4000, () => {
-        //         this.message.setAlpha(1)
-        //         this.message.setY(650)
-        //     })
-        // })
-        
-
         // initial message
         this.animations.messageAnimation(this.message, 10000, () => {
             this.message.setAlpha(1)
@@ -102,6 +125,135 @@ class Stove extends Phaser.Scene {
 
     }
 
-    update() {
+    setWordCombos(){
+        // remove all previous combos   
+        if(this.wordCombos){
+            for(const c of this.wordCombos){
+                c.quickDestroy()
+            }
+        }
+
+        this.wordCombos = []
+
+        if(!itemsPanel.hasAllIngredients(this.itemsInPot)){
+            return
+        }
+
+        for(const [idx, item] of itemsPanel.items.entries()){
+            const rawVeg = ['tomato', 'carrot', 'garlic']
+
+            if(rawVeg.includes(item.name)){
+                continue
+            }
+            let x = (idx < 5) ? 110 : 520
+            let y = 180 + (idx % 5) * 45
+
+            let comboText = new WordCombo(this, x, y, item.text, itemTextConfig, itemTextHighlightedConfig, 30, () => {
+                comboText.destroy()
+                itemsPanel.removeItem(item.name)
+
+                const newItem = this.add.image(item.item.x, item.item.y, item.name).setOrigin(0.5)
+                this.tweens.add({
+                    targets: newItem,
+                    props: {
+                        x: {value: this.pot.x, duration: 1000, ease: 'linear'},
+                        y: {value: this.pot.y, duration: 1000, ease: 'Back.easeIn'},
+                        alpha: {value: 0.2, duration: 1000, ease: 'Circ.easeIn'},
+                        scale: {value: 1.3, duration: 1000, ease: 'linear'}
+                    },
+                    onComplete: () => {
+                        newItem.destroy()
+                        this.itemsInPot.push(item)
+                        if(this.checkStartCook() && !this.startedCook){
+                            this.time.delayedCall(1000, () => {
+                                this.startCook()
+                                this.startedCook = true
+                            })
+                        }
+                    }
+                })
+            })
+            this.wordCombos.push(comboText)
+        }
+    }
+
+    // when enough items in pot, begin sequence of stiring and waiting and then conclusion
+    checkStartCook(){
+        let hasMain = false
+        let hasVeg = false
+        let hasSeasoning = false
+        for(const item of this.itemsInPot){
+            if(itemsPanel.main.includes(item.name)){
+                hasMain = true
+            }
+            if(itemsPanel.vegetable.includes(item.name)){
+                hasVeg = true
+            }
+            if(itemsPanel.seasoning.includes(item.name)){
+                hasSeasoning = true
+            }
+        }
+
+        return (hasMain && hasVeg && hasSeasoning)
+    }
+
+    // begin sequence of stiring and waiting and then finish
+    startCook(){
+        let stirText = new WordCombo(this, 335, 270, "Stir", specialTextConfig, specialTextHighlightedConfig, null, () => {
+            stirText.destroy()
+            this.time.delayedCall(2000, () => {
+                let waitText = new WordCombo(this, 335, 270, "Wait...", specialTextConfig, specialTextHighlightedConfig, null, () => {
+                    waitText.destroy()
+                    this.time.delayedCall(4000, () => {
+                        let stirText = new WordCombo(this, 335, 270, "Stir", specialTextConfig, specialTextHighlightedConfig, null, () => {
+                            stirText.destroy()
+                                this.time.delayedCall(2000, () => {
+                                    let finishText = new WordCombo(this, 335, 270, "Finish", specialTextConfig, specialTextHighlightedConfig, null, () => {
+                                        finishText.destroy()
+                                        this.finishAnimation()
+                                    })
+                                })
+
+                        })
+                    })
+
+                })
+            })
+
+        })
+
+    }
+
+    finishAnimation(){
+        const emitter = this.add.particles(this.pot.x, this.pot.y, "starParticle", { 
+            lifespan: { min: 500, max: 750 }, 
+            speed: {min: 200, max: 350},
+            alpha: { start: 1, end: 0 }, 
+            scale: { start: 1, end: 0.5 }, 
+            emitting: false 
+        })
+        this.pot.setDepth(10)
+
+        this.tweens.add({
+            targets: this.pot,
+            props: {
+                alpha: {value: 0.5, duration: 900, yoyo: true, ease: 'Circ.easeIn'},
+                scale: {value: 1.4, duration: 900, yoyo: true, ease: 'Sine.easeInOut'}
+            },
+            onStart: () => {
+                emitter.explode(70)
+            },
+            onYoyo: () => {
+                emitter.explode(80)
+            },
+            onComplete: () => {
+                emitter.explode(90)
+                this.time.delayedCall(1000, () => {
+                    
+                })
+
+
+            }
+        })
     }
 }

@@ -101,9 +101,10 @@ class Counter extends Phaser.Scene {
         this.wordCombos = []
 
         let items = itemsPanel.getCuttableItems()
-
+        
         for(const [idx, i] of items.entries()){
-            let comboText = new WordCombo(this, 565, 40 + this.wordCombos.length * 50, i.name, itemTextConfig, itemTextHighlightedConfig, 30, () => {
+            // word to put on cutting board
+            let comboText = new WordCombo(this, 565, 40 + this.wordCombos.length * 50, i.text, itemTextConfig, itemTextHighlightedConfig, 30, () => {
                 comboText.destroy()
 
                 // animation
@@ -115,9 +116,11 @@ class Counter extends Phaser.Scene {
                         y: {value: 305 + 25 * idx, duration: 1000, ease: 'linear'},
                     },
                     onComplete: () => {
-                        let comboText = new WordCombo(this, this.wordLocations[idx].x, this.wordLocations[idx].y, "cut " + i.name, itemTextConfig, itemTextHighlightedConfig, 30, () => {
+                        // word to cut item
+                        let comboText = new WordCombo(this, this.wordLocations[idx].x, this.wordLocations[idx].y, "Cut " + i.text, itemTextConfig, itemTextHighlightedConfig, 30, () => {
                             const slicedItem = this.add.image(395 - 70 * idx, 305 + 25 * idx, i.name + "Sliced").setOrigin(0.5).setVisible(false)
 
+                            // knife animation
                             this.knifeAnimation(395 - 70 * idx, 305 + 25 * idx, i.name, () => {
                                 slicedItem.setVisible(true)
                                 newItem.destroy()
@@ -126,36 +129,42 @@ class Counter extends Phaser.Scene {
                             comboText.destroy()
 
                             this.time.delayedCall(1000, () => {
-                                let slicedComboText = new WordCombo(this, this.wordLocations[idx].x, this.wordLocations[idx].y, "sliced " + i.name, itemTextConfig, itemTextHighlightedConfig, 30, () => {
+                                // word to pick up sliced item
+                                let slicedComboText = new WordCombo(this, this.wordLocations[idx].x, this.wordLocations[idx].y, "Sliced " + i.text, itemTextConfig, itemTextHighlightedConfig, 30, () => {
                                     slicedComboText.destroy()
                                     const [tweenX, tweenY] = itemsPanel.getPosition(itemsPanel.items.length)
                                     this.animations.pickupAnimation(slicedItem, tweenX, tweenY, () => {
                                         const newSlicedItem = itemsPanel.add.image(310, 310, i.name + "Sliced").setOrigin(0.5)
-                                        itemsPanel.addItem(newSlicedItem, i.name + "Sliced")
+                                        itemsPanel.addItem(newSlicedItem, i.name + "Sliced", 'Sliced ' + i.text)
                                         slicedItem.destroy()
                                     })
                                     
                                 })
                             })
-                            
+                            // cut message
+                            this.message.destroy()
+                            this.message = this.add.text(325, 650, "Chop Chop Chop").setOrigin(0.5).setFontSize(20).setLineSpacing(12)
+                            this.animations.messageAnimation(this.message, 4000, () => {
+                                this.message.setAlpha(1)
+                                this.message.setY(650)
+                            })
                         })
                     }
                 })
 
-
                 itemsPanel.removeItem(i.name)
 
+                // message for putting on board
                 this.message.destroy()
-                this.message = this.add.text(325, 650, "You put " + i.name + " on the\n cutting board").setOrigin(0.5).setFontSize(20).setLineSpacing(12)
+                this.message = this.add.text(325, 650, "You put " + i.text + " on the\n cutting board").setOrigin(0.5).setFontSize(20).setLineSpacing(12)
                 this.animations.messageAnimation(this.message, 4000, () => {
                     this.message.setAlpha(1)
                     this.message.setY(650)
                 })
             })
             this.wordCombos.push(comboText)
-
         }
-    }
+    }   
 
     knifeAnimation(x, y, name, callback){
         this.tweens.add({

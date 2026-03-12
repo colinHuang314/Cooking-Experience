@@ -79,7 +79,7 @@ class Cabinet extends Phaser.Scene {
             const [tweenX, tweenY] = itemsPanel.getPosition(itemsPanel.items.length)
             this.animations.pickupAnimation(this.salt, tweenX, tweenY, () => {
                 let salt = itemsPanel.add.image(310, 310, 'salt').setOrigin(0.5)
-                itemsPanel.addItem(salt, "salt")
+                itemsPanel.addItem(salt, "salt", 'Salt')
                 this.salt.destroy()
             })
             this.message.destroy()
@@ -94,7 +94,7 @@ class Cabinet extends Phaser.Scene {
             const [tweenX, tweenY] = itemsPanel.getPosition(itemsPanel.items.length)
             this.animations.pickupAnimation(this.pepper, tweenX, tweenY, () => {
                 const pepper = itemsPanel.add.image(310, 310, 'pepper').setOrigin(0.5)
-                itemsPanel.addItem(pepper, "pepper")
+                itemsPanel.addItem(pepper, "pepper", 'Pepper')
                 this.pepper.destroy()
             })
             this.message.destroy()
@@ -109,7 +109,7 @@ class Cabinet extends Phaser.Scene {
             const [tweenX, tweenY] = itemsPanel.getPosition(itemsPanel.items.length)
             this.animations.pickupAnimation(this.chili, tweenX, tweenY, () => {
                 const chili = itemsPanel.add.image(310, 310, 'chili').setOrigin(0.5)
-                itemsPanel.addItem(chili, "chili")
+                itemsPanel.addItem(chili, "chili", 'Chili Flakes')
                 this.chili.destroy()
             })
             this.message.destroy()
@@ -124,7 +124,7 @@ class Cabinet extends Phaser.Scene {
             const [tweenX, tweenY] = itemsPanel.getPosition(itemsPanel.items.length)
             this.animations.pickupAnimation(this.garlic, tweenX, tweenY, () => {
                 const garlic = itemsPanel.add.image(310, 310, 'garlic').setOrigin(0.5)
-                itemsPanel.addItem(garlic, "garlic")
+                itemsPanel.addItem(garlic, "garlic", 'Garlic')
                 this.garlic.destroy()
             })
             this.message.destroy()
@@ -139,7 +139,7 @@ class Cabinet extends Phaser.Scene {
             const [tweenX, tweenY] = itemsPanel.getPosition(itemsPanel.items.length)
             this.animations.pickupAnimation(this.noodles, tweenX, tweenY, () => {
                 const noodles = itemsPanel.add.image(310, 310, 'noodles').setOrigin(0.5)
-                itemsPanel.addItem(noodles, "noodles")
+                itemsPanel.addItem(noodles, "noodles", 'Noodles')
                 this.noodles.destroy()
             })
             this.message.destroy()
@@ -154,7 +154,7 @@ class Cabinet extends Phaser.Scene {
             const [tweenX, tweenY] = itemsPanel.getPosition(itemsPanel.items.length)
             this.animations.pickupAnimation(this.soySauce, tweenX, tweenY, () => {
                 const soySauce = itemsPanel.add.image(310, 310, 'soySauce').setOrigin(0.5)
-                itemsPanel.addItem(soySauce, "soySauce")
+                itemsPanel.addItem(soySauce, "soySauce", 'Soy Sauce')
                 this.soySauce.destroy()
             })
             this.message.destroy()

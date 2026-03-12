@@ -8,7 +8,14 @@ class ItemsPanel extends Phaser.Scene {
     }
 
     create() {
-        this.cuttable = ["tomato", "garlic", "carrot"]
+        this.allItemNames = ["tomato", "garlic", "carrot", "chicken", "groundBeef", "noodles", "chili", "pepper", "salt", "soySauce", "carrotSliced", "garlicSliced", "tomatoSliced"]
+        this.skipItemNames = ["chicken", "groundBeef", "noodles", "chili", "pepper", "salt", "soySauce", "carrotSliced", "garlicSliced", "tomatoSliced"]
+        this.skipItemText = ["Chicken", "Ground Beef", "Noodles", "Chili Flakes", "Pepper", "Salt", "Soy Sauce", "Sliced Carrot", "Sliced Garlic", "Sliced Tomato"]
+        this.cuttable = ["tomato", "garlic", "carrot", "carrotSliced", "garlicSliced", "tomatoSliced"]
+        this.main = ["chicken", "groundBeef", "noodles"]
+        this.vegetable = this.cuttable
+        this.seasoning = ["chili", "pepper", "salt", "soySauce"]
+
         this.items = []
 
         this.panel = this.add.rectangle(620, 0, 280, 600, 0xaaaaaa, 0.8).setOrigin(0, 0)
@@ -20,8 +27,8 @@ class ItemsPanel extends Phaser.Scene {
 
     }
 
-    addItem(item, name) {
-        this.items.push({ item, name })
+    addItem(item, name, text) {
+        this.items.push({ item, name, text })
         this.draw()
     }
 
@@ -74,6 +81,37 @@ class ItemsPanel extends Phaser.Scene {
             }
         }
         return result
+    }
+
+    // one main, one vegetable, one seasoning
+    hasAllIngredients(potList = []){
+        let hasMain = false
+        let hasVeg = false
+        let hasSeasoning = false
+        for(const item of this.items){
+            if(this.main.includes(item.name)){
+                hasMain = true
+            }
+            if(this.vegetable.includes(item.name)){
+                hasVeg = true
+            }
+            if(this.seasoning.includes(item.name)){
+                hasSeasoning = true
+            }
+        }
+        for(const item of potList){
+            if(this.main.includes(item.name)){
+                hasMain = true
+            }
+            if(this.vegetable.includes(item.name)){
+                hasVeg = true
+            }
+            if(this.seasoning.includes(item.name)){
+                hasSeasoning = true
+            }
+        }
+
+        return (hasMain && hasVeg && hasSeasoning)
     }
 
     

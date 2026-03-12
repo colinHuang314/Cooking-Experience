@@ -53,6 +53,7 @@ class Load extends Phaser.Scene {
         this.load.image('carrotParticle', './assets/images/carrotParticle.png')
         this.load.image('garlicParticle', './assets/images/garlicParticle.png')
         this.load.image('tomatoParticle', './assets/images/tomatoParticle.png')
+        this.load.image('starParticle', './assets/images/starParticle.png')
         
         this.load.image('letterFront', './assets/images/letterFront.png')
         this.load.image('menuSS', './assets/images/menuSS.png')
