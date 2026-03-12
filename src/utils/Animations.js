@@ -11,7 +11,7 @@ class Animations{
                 y: {value: y, duration: 1000, ease: 'Back.easeIn'},
                 scaleX: {value: 1.5, duration: 1000, ease: 'Power2'},
                 scaleY: {value: 1.5, duration: 1000, ease: 'Power2'},
-                alpha: {value: 0, duration: 1000, ease: 'linear'},
+                alpha: {value: 0, delay: 200, duration: 800, ease: 'linear'},
             },
             onComplete: () => {
                 item.destroy()

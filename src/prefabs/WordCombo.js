@@ -138,7 +138,7 @@ class WordCombo{
             onComplete: () => {
                 this.onCompleteCallback()
 
-                this.scene.time.delayedCall(1200, () => {
+                this.scene.time.delayedCall(1200, () => { // timer
                     this.resetCombo()
                 })
             }
@@ -158,6 +158,13 @@ class WordCombo{
             }
             this.destroyed = true
         })
+    }
+
+    quickDestroy(){
+        for(let letterText of this.letterTexts){
+            letterText.destroy()
+        }
+        this.destroyed = true
     }
 
 }

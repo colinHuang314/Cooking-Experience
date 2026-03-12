@@ -8,6 +8,7 @@ class ItemsPanel extends Phaser.Scene {
     }
 
     create() {
+        this.cuttable = ["tomato", "garlic", "carrot"]
         this.items = []
 
         this.panel = this.add.rectangle(620, 0, 280, 600, 0xaaaaaa, 0.8).setOrigin(0, 0)
@@ -24,9 +25,27 @@ class ItemsPanel extends Phaser.Scene {
         this.draw()
     }
 
-    removeItem(item) {
-        this.items = this.items.filter(i => i.item !== item) // https://www.w3schools.com/jsref/jsref_filter.asp
-        this.draw()
+    removeItem(name) {
+        for (const entry of this.items) {
+            if (entry.name === name) {
+                this.tweens.add({
+                    targets: entry.item,
+                    alpha: 0,
+                    duration: 500,
+                    onComplete: () => {
+                        entry.item.destroy()
+                    }
+                })
+                const idx = this.items.indexOf(entry)
+                if (idx !== -1) {
+                    this.items.splice(idx, 1)
+                }
+                break
+            }
+        }
+        this.time.delayedCall(1000, () => {
+            this.draw()
+        })
     }
 
     getPosition(index){
@@ -41,6 +60,24 @@ class ItemsPanel extends Phaser.Scene {
             item.item.setPosition(x, y)
         })
     }
+
+    // https://stackoverflow.com/questions/12462318/find-a-value-in-an-array-of-objects-in-javascript
+    getItem(name){
+        return this.items.find(i => i.name === name)
+    }
+
+    getCuttableItems() {
+        let result = [];
+        for (const i of this.items) {
+            if (this.cuttable.includes(i.name)) {
+                result.push(i)
+            }
+        }
+        return result
+    }
+
+    
+
 }
 
 /*

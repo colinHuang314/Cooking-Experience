@@ -19,17 +19,6 @@ class Cabinet extends Phaser.Scene {
         // background
         this.add.image(0, 0, 'cabinet').setOrigin(0, 0)
 
-        // testing
-        // this.add.particles(150, 300, 'saltParticle', { 
-            
-        //     lifespan: 700,
-        //     speedX: { min: -50, max: 50 },
-        //     speedY: { min: 0, max: 100 },
-        //     gravityY: 400,
-        //     alpha: { start: 1, end: 0 },
-        //     scale: { start: 0.5, end: 1 },
-        // })
-
         // message box
         this.add.rectangle(0, 500, 620, 100, 0x000000, 0.8).setOrigin(0, 0)
     

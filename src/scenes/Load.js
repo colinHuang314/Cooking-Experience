@@ -44,12 +44,18 @@ class Load extends Phaser.Scene {
         this.load.image('garlic', './assets/images/garlic.png')
         this.load.image('groundBeef', './assets/images/groundBeef.png')
         this.load.image('noodles', './assets/images/noodles.png')
-        this.load.image('slicedCarrot', './assets/images/slicedCarrot.png')
-        this.load.image('slicedGarlic', './assets/images/slicedGarlic.png')
-        this.load.image('slicedTomato', './assets/images/slicedTomato.png')
+        this.load.image('carrotSliced', './assets/images/carrotSliced.png')
+        this.load.image('garlicSliced', './assets/images/garlicSliced.png')
+        this.load.image('tomatoSliced', './assets/images/tomatoSliced.png')
         this.load.image('soySauce', './assets/images/soySauce.png')
         this.load.image('tomato', './assets/images/tomato.png')
         this.load.image('knife', './assets/images/knife.png')
+        this.load.image('carrotParticle', './assets/images/carrotParticle.png')
+        this.load.image('garlicParticle', './assets/images/garlicParticle.png')
+        this.load.image('tomatoParticle', './assets/images/tomatoParticle.png')
+        
+        this.load.image('letterFront', './assets/images/letterFront.png')
+        this.load.image('menuSS', './assets/images/menuSS.png')
     }
 
     create() {

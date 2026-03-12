@@ -9,7 +9,9 @@ class Menu extends Phaser.Scene{
     create(){
         // background
         this.cameras.main.setBackgroundColor('#D6B687')
-        this.cameras.main.fadeIn(900)
+
+        // this.cameras.main.fadeIn(900)
+
         this.events.on('wake', () => {
             this.cameras.main.fadeIn(900)
         })
@@ -30,10 +32,13 @@ class Menu extends Phaser.Scene{
                 itemsPanel.addItem(itemsPanel.add.image(310, 310, 'noodles').setOrigin(0.5), "noodles")
                 itemsPanel.addItem(itemsPanel.add.image(310, 310, 'pepper').setOrigin(0.5), "pepper")
                 itemsPanel.addItem(itemsPanel.add.image(310, 310, 'salt').setOrigin(0.5), "salt")
-                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'slicedCarrot').setOrigin(0.5), "slicedCarrot")
-                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'slicedGarlic').setOrigin(0.5), "slicedGarlic")
-                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'slicedTomato').setOrigin(0.5), "slicedTomato")
+                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'carrotSliced').setOrigin(0.5), "carrotSliced")
+                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'garlicSliced').setOrigin(0.5), "garlicSliced")
+                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'tomatoSliced').setOrigin(0.5), "tomatoSliced")
                 itemsPanel.addItem(itemsPanel.add.image(310, 310, 'soySauce').setOrigin(0.5), "soySauce")
+                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'carrot').setOrigin(0.5), "carrot")
+                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'garlic').setOrigin(0.5), "garlic")
+                itemsPanel.addItem(itemsPanel.add.image(310, 310, 'tomato').setOrigin(0.5), "tomato")
                 this.scene.switch('stoveScene')
                 itemsPanel.cameras.main.setVisible(true)
             }   
@@ -107,7 +112,7 @@ class Menu extends Phaser.Scene{
         // this.add.text(game.config.width/2, 230, 'and make a full meal!', instructionsConfig).setOrigin(0.5)
 
         // start combo text (coords are manually tuned)
-        const cabinetComboText = new WordCombo(this, 300, 175, 'Cabinet', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
+        const cabinetComboText = new WordCombo(this, 300, 210, 'Cabinet', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
             this.time.delayedCall(250, () => {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)

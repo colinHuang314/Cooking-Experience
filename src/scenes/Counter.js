@@ -10,8 +10,14 @@ class Counter extends Phaser.Scene {
         console.log("counter create")
         this.cameras.main.setBackgroundColor('#D6B687')
         this.cameras.main.fadeIn(900)
+
+        this.wordCombos = []
+
+        this.wordLocations = [{x: 526, y: 314}, {x: 354, y: 208}, {x: 133, y: 318}]
+
         this.events.on('wake', () => {
             this.cameras.main.fadeIn(900)
+            this.setWordCombos()
         })
 
         this.animations = new Animations(this)
@@ -19,14 +25,17 @@ class Counter extends Phaser.Scene {
         // background
         this.add.image(0, 0, 'counter').setOrigin(0, 0)
         
-
         // message box
         this.add.rectangle(0, 500, 620, 100, 0x000000, 0.8).setOrigin(0, 0)
       
         // sprites
-        this.knife = this.add.image(350, 280, 'knife').setOrigin(0.5)
+        this.knife = this.add.image(511, 280, 'knife').setOrigin(0.5)
 
+        // message
         this.message = this.add.text(325, 650, 'The counter is usually filled with\n random stuff and is messy!').setOrigin(0.5).setFontSize(20).setLineSpacing(12)
+
+        // cuttable item words
+        this.setWordCombos()
 
         // scene nav
         const stoveComboText = new WordCombo(this, 320, 480, 'Cabinet', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
@@ -68,22 +77,6 @@ class Counter extends Phaser.Scene {
             })
         })
 
-        // items
-        // let saltComboText = new WordCombo(this, 476, 335, 'Salt', itemTextConfig, itemTextHighlightedConfig, 30, () => {
-        //     saltComboText.destroy()
-        //     this.animations.pickupAnimation(this.salt, 700, 450,() => {
-        //         const salt = this.itemsPanel.add.image(310, 310, 'salt').setOrigin(0.5)
-        //         this.itemsPanel.addItem(salt, "salt")
-        //     })
-        //     this.message.destroy()
-        //     this.message = this.add.text(325, 650, "You got salt! This is used a lot.").setOrigin(0.5).setFontSize(20).setLineSpacing(12)
-        //     this.animations.messageAnimation(this.message, 4000, () => {
-        //         this.message.setAlpha(1)
-        //         this.message.setY(650)
-        //     })
-        // })
-        
-
         // initial message
         this.animations.messageAnimation(this.message, 10000, () => {
             this.message.setAlpha(1)
@@ -97,6 +90,102 @@ class Counter extends Phaser.Scene {
 
     }
 
-    update() {
+    setWordCombos(){
+        // remove all previous combos   
+        if(this.wordCombos){
+            for(const c of this.wordCombos){
+                c.quickDestroy()
+            }
+        }
+
+        this.wordCombos = []
+
+        let items = itemsPanel.getCuttableItems()
+
+        for(const [idx, i] of items.entries()){
+            let comboText = new WordCombo(this, 565, 40 + this.wordCombos.length * 50, i.name, itemTextConfig, itemTextHighlightedConfig, 30, () => {
+                comboText.destroy()
+
+                // animation
+                const newItem = this.add.image(i.item.x, i.item.y, i.name).setOrigin(0.5)
+                this.tweens.add({
+                    targets: newItem,
+                    props: {
+                        x: {value: 395 - 70 * idx, duration: 1000, ease: 'linear'},
+                        y: {value: 305 + 25 * idx, duration: 1000, ease: 'linear'},
+                    },
+                    onComplete: () => {
+                        let comboText = new WordCombo(this, this.wordLocations[idx].x, this.wordLocations[idx].y, "cut " + i.name, itemTextConfig, itemTextHighlightedConfig, 30, () => {
+                            const slicedItem = this.add.image(395 - 70 * idx, 305 + 25 * idx, i.name + "Sliced").setOrigin(0.5).setVisible(false)
+
+                            this.knifeAnimation(395 - 70 * idx, 305 + 25 * idx, i.name, () => {
+                                slicedItem.setVisible(true)
+                                newItem.destroy()
+
+                            })
+                            comboText.destroy()
+
+                            this.time.delayedCall(1000, () => {
+                                let slicedComboText = new WordCombo(this, this.wordLocations[idx].x, this.wordLocations[idx].y, "sliced " + i.name, itemTextConfig, itemTextHighlightedConfig, 30, () => {
+                                    slicedComboText.destroy()
+                                    const [tweenX, tweenY] = itemsPanel.getPosition(itemsPanel.items.length)
+                                    this.animations.pickupAnimation(slicedItem, tweenX, tweenY, () => {
+                                        const newSlicedItem = itemsPanel.add.image(310, 310, i.name + "Sliced").setOrigin(0.5)
+                                        itemsPanel.addItem(newSlicedItem, i.name + "Sliced")
+                                        slicedItem.destroy()
+                                    })
+                                    
+                                })
+                            })
+                            
+                        })
+                    }
+                })
+
+
+                itemsPanel.removeItem(i.name)
+
+                this.message.destroy()
+                this.message = this.add.text(325, 650, "You put " + i.name + " on the\n cutting board").setOrigin(0.5).setFontSize(20).setLineSpacing(12)
+                this.animations.messageAnimation(this.message, 4000, () => {
+                    this.message.setAlpha(1)
+                    this.message.setY(650)
+                })
+            })
+            this.wordCombos.push(comboText)
+
+        }
+    }
+
+    knifeAnimation(x, y, name, callback){
+        this.tweens.add({
+            targets: this.knife,
+            props: {
+                x: {value: x + 40, duration: 300, yoyo: true, ease: 'linear'},
+                y: {value: y, duration: 300, yoyo: true, ease: 'Back.easeIn'},
+                angle: {value: 20, duration: 150, yoyo: true, ease: 'Sine.easeInOut'}
+            },
+            onYoyo: () => {
+                if(callback) {
+                    this.time.delayedCall(210, () => {
+                        callback()
+                    })
+                }
+                this.makeCutParticles(x, y, name, "")
+            }
+        })
+    }
+
+    makeCutParticles(x, y, name) {
+        const emitter = this.add.particles(x, y, name + "Particle", { 
+            lifespan: { min: 300, max: 500 }, 
+            speedX: { min: -150, max: 150 }, 
+            speedY: { min: -200, max: -400 }, 
+            gravityY: 800, 
+            alpha: { start: 1, end: 0 }, 
+            scale: { start: 0.8, end: 0.2 }, 
+            emitting: false 
+        })
+        emitter.explode(15)
     }
 }

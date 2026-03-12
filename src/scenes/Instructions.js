@@ -10,6 +10,8 @@ class Instructions extends Phaser.Scene {
         this.cameras.main.setBackgroundColor('#000000')
         this.cameras.main.fadeIn(900)
 
+        this.letter = this.add.image(-100, 300, 'letterFront').setOrigin(0.5).setScale(0.08).setAlpha(0).setAngle(-10)
+
         this.soundPlaying = false
 
 
@@ -17,6 +19,8 @@ class Instructions extends Phaser.Scene {
             fontFamily: 'Helvetica',
             fontSize: '40px',
             color: '#ffffff',
+            stroke: '#000000',
+            strokeThickness: 6,
             align: 'center',
             wordWrap: { width: game.config.width - 100 }
         }
@@ -27,7 +31,60 @@ class Instructions extends Phaser.Scene {
             "For this Playable Postcard, all you need to do is type the floating words!",
             "Greetings from UCSC!",
             "I've been cooking my own food! It's not as good as when you make it ...",
-            "Here's a little insight into how I make my meals."
+            "Here's a little insight into how I make my meals.",
+        ]
+
+        this.myTweens = [
+            { // dummy
+                targets: this.letter,
+                props: {
+                    x: {value: -100, duration: 1000, ease: 'Sine.easeInOut'},                    
+                }
+            },
+            {
+                targets: this.letter,
+                props: {
+                    x: {value: 200, duration: 3000, ease: 'Sine.easeInOut'},
+                    y: {value: 100, duration: 3000, ease: 'Sine.easeInOut'},
+                    scaleX: {value: 0.12, duration: 3000, ease: 'Sine.easeInOut'},
+                    scaleY: {value: 0.12, duration: 3000, ease: 'Sine.easeInOut'},
+                    alpha: {value: 0.5, duration: 3000, ease: 'Sine.easeInOut'},
+                    angle: {value: 10, duration: 2600, ease: 'Sine.easeInOut'},
+                }
+            },
+            {
+                targets: this.letter,
+                props: {
+                    x: {value: 120, duration: 3000, ease: 'Sine.easeInOut'},
+                    y: {value: 450, duration: 3000, ease: 'Sine.easeInOut'},
+                    scaleX: {value: 0.18, duration: 3000, ease: 'Sine.easeInOut'},
+                    scaleY: {value: 0.18, duration: 3000, ease: 'Sine.easeInOut'},
+                    alpha: {value: 0.7, duration: 3000, ease: 'Sine.easeInOut'},
+                    angle: {value: -7, duration: 2600, ease: 'Sine.easeInOut'},
+                }
+            },
+            {
+                targets: this.letter,
+                props: {
+                    x: {value: 600, duration: 3000, ease: 'Sine.easeInOut'},
+                    y: {value: 100, duration: 3000, ease: 'Sine.easeInOut'},
+                    scaleX: {value: 0.22, duration: 3000, ease: 'Sine.easeInOut'},
+                    scaleY: {value: 0.22, duration: 3000, ease: 'Sine.easeInOut'},
+                    alpha: {value: 0.9, duration: 3000, ease: 'Sine.easeInOut'},
+                    angle: {value: 8, duration: 2600, ease: 'Sine.easeInOut'},
+                }
+            },
+            {
+                targets: this.letter,
+                props: {
+                    x: {value: 650, duration: 3000, ease: 'Sine.easeInOut'},
+                    y: {value: 450, duration: 3000, ease: 'Sine.easeInOut'},
+                    scaleX: {value: 0.26, duration: 3000, ease: 'Sine.easeInOut'},
+                    scaleY: {value: 0.26, duration: 3000, ease: 'Sine.easeInOut'},
+                    alpha: {value: 1, duration: 3000, ease: 'Sine.easeInOut'},
+                    angle: {value: -7, duration: 2600, ease: 'Sine.easeInOut'},
+                }
+            }
         ]
         this.comboWords = [null, "Type This", "Next", "Next", "Begin"]
 
@@ -73,7 +130,7 @@ class Instructions extends Phaser.Scene {
             alpha: 1,
             duration: 800,
             onComplete: () => {
-                if (this.currentIndex == 0) {
+                if (this.currentIndex === 0) { // first one
                     this.tweens.add({
                         targets: this.textObjects.main,
                         alpha: 0,
@@ -93,6 +150,9 @@ class Instructions extends Phaser.Scene {
                 }
             }
         })
+
+        // play letter animation
+        this.tweens.add(this.myTweens[index])
     }
 
     createCombo(index) {
@@ -117,10 +177,7 @@ class Instructions extends Phaser.Scene {
                             this.showMessage(this.currentIndex)
                         } else {
                             // last message
-                            this.cameras.main.fadeOut(900)
-                            this.time.delayedCall(500, () => {
-                                this.scene.switch('menuScene')
-                            })
+                            this.finalAnimation()
                         }
                     }
                 })
@@ -146,6 +203,49 @@ class Instructions extends Phaser.Scene {
         }
     }
 
+    finalAnimation(){
+        this.tweens.add({
+            targets: this.letter,
+            props: {
+                x: {value: 400, duration: 3000, ease: 'Sine.easeInOut'},
+                y: {value: 300, duration: 3000, ease: 'Sine.easeInOut'},
+                scaleX: {value: 1, duration: 3000, ease: 'Sine.easeInOut'},
+                scaleY: {value: 1, duration: 3000, ease: 'Sine.easeInOut'},
+                alpha: {value: 1, duration: 3000, ease: 'Sine.easeInOut'},
+                angle: {value: 0, delay: 2000, duration: 1000, ease: 'Sine.easeInOut'},
+            },
+            onComplete: () => this.finalAnimationStep2()
+        })
+    }
+
+    finalAnimationStep2() {
+        this.tweens.add({
+            targets: this.letter,
+            props: {
+                scaleX: {value: 0, duration: 1000, ease: 'Sine.easeInOut'},
+            },
+            onComplete: () => this.finalAnimationStep3()
+        })
+    }
+
+    finalAnimationStep3() {
+        this.letter.destroy()
+        this.menuSS = this.add.image(width * 0.5, height * 0.5, 'menuSS').setOrigin(0.5).setScale(0, 1)
+
+        this.tweens.add({
+            targets: this.menuSS,
+            props: {
+                scaleX: {value: 1, duration: 1000, ease: 'Sine.easeInOut'},
+            },
+            onComplete: () => this.finalAnimationStep4()
+        })
+    }
+
+    finalAnimationStep4() {
+        this.scene.switch('menuScene')
+    }
+
     update() {
     }
 }
+

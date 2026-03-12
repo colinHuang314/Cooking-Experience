@@ -3,17 +3,46 @@ Name: Colin Huang
 
 Title: Cooking Experience
 
-Time Spent: 25 hrs
+Time Spent: 28 hrs
 
-Notes: Type "skip" during the intro of the game to skip it, type "skip" in the menu to get all items and go to the stove scene
+Notes:  Type "skip" during the intro of the game to skip the intro
+        Type "skip" in the menu to get all items and go to the stove scene
+
+        For the 5 components I did:
+            - text objects
+            - tweens
+            - particle effects
+            - keyboard input
+            - somewhat timers and cameras (delayedCall() and fadeIn())
+
+        Polish/Style: I made nice animations to make the game feel smooth and made the logic for the floating text. Also a unique and fun concept.
 
 Citations:
 https://rexrainbow.github.io/phaser3-rex-notes/docs/site/loader/
 https://www.w3schools.com/jsref/jsref_filter.asp
 https://phaser.io/examples/v3.85.0/tweens/view/multiple-delayed-properties
 https://phaser.io/examples/v3.85.0/tweens/view/multiple-targets-multiple-properties
+https://stackoverflow.com/questions/12462318/find-a-value-in-an-array-of-objects-in-javascript
 Prof. Altice
+
+
+
+
+TODO
+
+flip card for conclusion
+replay without reloading
+
+credits(what i made and what i used)
+
+5 major components
+
+!!! SOUND
+
+stove logic and conclusion logic
 */
+
+
 
 
 config = {
@@ -99,12 +128,12 @@ let menuScene = null
 
 // wordcombo text configs
 let itemTextConfig = { 
-    ...defaultTextConfig, color: '#048e3b', fontSize: '30px',
-    shadow: { ...defaultTextHighlightedConfig.shadow, color: '#048e3b' } 
+    ...defaultTextConfig, color: '#cfcf18', fontSize: '28px', stroke: '#2d2d05', strokeThickness: 3,
+    shadow: { ...defaultTextHighlightedConfig.shadow, color: '#cfcf18' } 
 }
 let itemTextHighlightedConfig = { 
-    ...defaultTextHighlightedConfig, color: '#00e135', fontSize: '34px',
-    shadow: { ...defaultTextHighlightedConfig.shadow, color: '#00c64f' } 
+    ...defaultTextHighlightedConfig, color: '#fff200', fontSize: '32px', stroke: '#000000',
+    shadow: { ...defaultTextHighlightedConfig.shadow, color: '#fff200' } 
 }
 let menuTextConfig = { 
     ...defaultTextConfig, fontSize: '28px',
