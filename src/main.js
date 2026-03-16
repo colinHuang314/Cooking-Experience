@@ -3,7 +3,7 @@ Name: Colin Huang
 
 Title: Cooking At Manzanita
 
-Time Spent: 28 hrs
+Time Spent: 30 hrs
 
 Notes:  Type "skip" during the intro of the game to skip the intro
         Type "skip" in the menu to get all items and go to the stove scene
@@ -14,9 +14,9 @@ Notes:  Type "skip" during the intro of the game to skip the intro
             - tweens
             - particle effects
             - keyboard input
-            - somewhat timers and cameras (delayedCall() and fadeIn())
+            - somewhat timers and cameras (lots of delayedCall() and also fadeIn())
 
-        Polish/Style: I made nice animations to make the game feel smooth and made the logic for the floating text. Also a unique and fun concept.
+        Polish/Style: I made nice animations and my own sounds to make the game feel smooth and made the logic for the floating text. Also a unique and fun concept.
 
 Citations:
 https://rexrainbow.github.io/phaser3-rex-notes/docs/site/loader/
@@ -36,10 +36,7 @@ credits(what i made and what i used)
 
 add more messages
 
-stove logic and conclusion logic
 */
-
-
 
 
 config = {
@@ -52,7 +49,7 @@ config = {
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: [ Load, Instructions, Menu, Fridge, Cabinet, Stove, Counter, ItemsPanel],
+    scene: [ Load, Instructions, Menu, Fridge, Cabinet, Stove, Counter, ItemsPanel, Ending],
     fps: {
         target: 60,
         forceSetTimeOut: true

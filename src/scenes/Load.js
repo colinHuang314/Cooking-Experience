@@ -66,9 +66,12 @@ class Load extends Phaser.Scene {
         
         this.load.image('letterFront', './assets/images/letterFront.png')
         this.load.image('menuSS', './assets/images/menuSS.png')
+        this.load.image('heart', './assets/images/heart.png')
+        this.load.image('potFront', './assets/images/potFront.png')
     }
 
     create() {
-        this.scene.start('instructionsScene')
+        // this.scene.start('instructionsScene')
+        this.scene.start('endingScene')
     }
 }
