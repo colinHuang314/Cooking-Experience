@@ -23,8 +23,18 @@ class Load extends Phaser.Scene {
 
         // audio
         this.load.audio('music', './assets/sound/music.mp3')
+        this.load.audio('threeShake', './assets/sound/threeShake.wav')
+        this.load.audio('bigSplash', './assets/sound/bigSplash.wav')
+        this.load.audio('chopChop', './assets/sound/chopChop.wav')
+        this.load.audio('mealComplete', './assets/sound/mealComplete.wav')
+        this.load.audio('oneNoteC', './assets/sound/oneNoteC.wav')
+        this.load.audio('sceneChange', './assets/sound/sceneChange.wav')
+        this.load.audio('smallSplash', './assets/sound/smallSplash.wav')
+        this.load.audio('spacePress', './assets/sound/spacePress.wav')
+        this.load.audio('toInventory', './assets/sound/toInventory.wav')
+        this.load.audio('wind', './assets/sound/wind.wav')
+        this.load.audio('wordComplete', './assets/sound/wordComplete.wav')
 
-        // load sprites
         //scenes
         this.load.image('cabinet', './assets/images/cabinetScene.png')
         this.load.image('fridge', './assets/images/fridgeScene.png')
@@ -33,7 +43,6 @@ class Load extends Phaser.Scene {
         this.load.image('kitchen', './assets/images/kitchen.png')
 
         // items
-        this.load.image('apple', './assets/images/apple.png')
         this.load.image('pot', './assets/images/pot.png')
         this.load.image('salt', './assets/images/salt.png')
         this.load.image('saltParticle', './assets/images/saltParticle.png')

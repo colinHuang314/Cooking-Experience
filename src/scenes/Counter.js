@@ -39,6 +39,7 @@ class Counter extends Phaser.Scene {
 
         // scene nav
         const stoveComboText = new WordCombo(this, 320, 480, 'Cabinet', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
+            this.sound.play('sceneChange', {rate: 0.75})
             this.time.delayedCall(250, () => {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)
@@ -48,6 +49,7 @@ class Counter extends Phaser.Scene {
             })
         })
         const fridgeComboText = new WordCombo(this, 530, 480, 'Stove', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
+            this.sound.play('sceneChange', {rate: 0.75})
             this.time.delayedCall(250, () => {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)
@@ -57,6 +59,7 @@ class Counter extends Phaser.Scene {
             })
         })
         const counterComboText = new WordCombo(this, 100, 480, 'Fridge', defaultTextConfig, defaultTextHighlightedConfig, null,() => {
+            this.sound.play('sceneChange', {rate: 0.75})
             this.time.delayedCall(250, () => {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)
@@ -67,6 +70,7 @@ class Counter extends Phaser.Scene {
         })
 
         const menuComboText = new WordCombo(this, 60, 30, 'Menu', menuTextConfig, menuTextHighlightedConfig, null,() => {
+            this.sound.play('sceneChange', {rate: 0.75})
             this.time.delayedCall(250, () => {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)
@@ -106,7 +110,7 @@ class Counter extends Phaser.Scene {
             // word to put on cutting board
             let comboText = new WordCombo(this, 565, 40 + this.wordCombos.length * 50, i.text, itemTextConfig, itemTextHighlightedConfig, 30, () => {
                 comboText.destroy()
-
+                
                 // animation
                 const newItem = this.add.image(i.item.x, i.item.y, i.name).setOrigin(0.5)
                 this.tweens.add({
@@ -120,6 +124,8 @@ class Counter extends Phaser.Scene {
                         let comboText = new WordCombo(this, this.wordLocations[idx].x, this.wordLocations[idx].y, "Cut " + i.text, itemTextConfig, itemTextHighlightedConfig, 30, () => {
                             const slicedItem = this.add.image(395 - 70 * idx, 305 + 25 * idx, i.name + "Sliced").setOrigin(0.5).setVisible(false)
 
+                            this.knifeSound()
+                
                             // knife animation
                             this.knifeAnimation(395 - 70 * idx, 305 + 25 * idx, i.name, () => {
                                 slicedItem.setVisible(true)
@@ -183,6 +189,9 @@ class Counter extends Phaser.Scene {
                 this.makeCutParticles(x, y, name, "")
             }
         })
+    }
+    knifeSound(){
+        this.sound.play('chopChop')
     }
 
     makeCutParticles(x, y, name) {

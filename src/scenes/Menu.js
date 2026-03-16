@@ -103,17 +103,18 @@ class Menu extends Phaser.Scene{
 
         // start combo text (coords are manually tuned)
         const cabinetComboText = new WordCombo(this, 300, 210, 'Cabinet', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
+            this.sound.play('sceneChange', {rate: 0.75})
             this.time.delayedCall(250, () => {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)
                 this.time.delayedCall(900, () => {
                     this.scene.switch('cabinetScene')
-                    itemsPanel.cameras.main.setVisible(true)
-
+                    itemsPanel.cameras.main.setVisible(true)    
                 })
             })
         })
         const stoveComboText = new WordCombo(this, 490, 235, 'Stove', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
+            this.sound.play('sceneChange', {rate: 0.75})
             this.time.delayedCall(250, () => {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)
@@ -124,22 +125,25 @@ class Menu extends Phaser.Scene{
             })
         })
         const fridgeComboText = new WordCombo(this, 140, 300, 'Fridge', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
+            this.sound.play('sceneChange', {rate: 0.75})
             this.time.delayedCall(250, () => {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)
                 this.time.delayedCall(900, () => {
                     this.scene.switch('fridgeScene')
-                    itemsPanel.cameras.main.setVisible(true)
+                    itemsPanel.cameras.main.setVisible(true)  
                 })
             })
         })
         const counterComboText = new WordCombo(this, 690, 320, 'Counter', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
+            this.sound.play('sceneChange', {rate: 0.75})
             this.time.delayedCall(250, () => {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)
                 this.time.delayedCall(900, () => {
                     this.scene.switch('counterScene')
                     itemsPanel.cameras.main.setVisible(true)
+                    
                 })
             })
         })

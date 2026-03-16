@@ -3,6 +3,9 @@ class Animations{
         this.scene = scene
     }
     pickupAnimation(item, x, y, callback){
+        this.scene.time.delayedCall(780, () => {
+            this.scene.sound.play('toInventory')
+        })
         //https://phaser.io/examples/v3.85.0/tweens/view/multiple-targets-multiple-properties
         this.scene.tweens.add({
             targets: item,

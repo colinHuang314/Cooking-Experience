@@ -103,7 +103,7 @@ class Instructions extends Phaser.Scene {
             if (combo === skipCombo) {
                 this.scene.switch('menuScene')
                 if (! this.soundPlaying){
-                    this.sound.play('music', { loop: true })
+                    this.sound.play('music', { loop: true, volume: 0.4 })
                     this.soundPlaying = true
                 }
             }   
@@ -153,6 +153,18 @@ class Instructions extends Phaser.Scene {
 
         // play letter animation
         this.tweens.add(this.myTweens[index])
+
+        if (index === 1){
+            this.time.delayedCall(1100, () => {
+                this.sound.play('wind', {volume: 0.3})
+            })
+        }
+        else if(index > 1){
+            this.time.delayedCall(500, () => {
+                this.sound.play('wind')
+            })
+        }
+
     }
 
     createCombo(index) {
@@ -161,7 +173,7 @@ class Instructions extends Phaser.Scene {
                 // audio on first key press
                 if (index == 1) {
                     if (! this.soundPlaying){
-                        this.sound.play('music', { loop: true })
+                        this.sound.play('music', { loop: true, volume: 0.4 })
                         this.soundPlaying = true
                     }
                 }
@@ -216,9 +228,11 @@ class Instructions extends Phaser.Scene {
             },
             onComplete: () => this.finalAnimationStep2()
         })
+        this.sound.play('wind', { detune: -1200})
     }
-
+    // flip over
     finalAnimationStep2() {
+        this.sound.play('wind', { detune: -1200})
         this.tweens.add({
             targets: this.letter,
             props: {
@@ -228,7 +242,10 @@ class Instructions extends Phaser.Scene {
         })
     }
 
+    // flip over
     finalAnimationStep3() {
+        this.sound.play('wind', { detune: -2400})
+        
         this.letter.destroy()
         this.menuSS = this.add.image(width * 0.5, height * 0.5, 'menuSS').setOrigin(0.5).setScale(0, 1)
 

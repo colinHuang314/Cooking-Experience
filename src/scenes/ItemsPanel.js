@@ -11,9 +11,9 @@ class ItemsPanel extends Phaser.Scene {
         this.allItemNames = ["tomato", "garlic", "carrot", "chicken", "groundBeef", "noodles", "chili", "pepper", "salt", "soySauce", "carrotSliced", "garlicSliced", "tomatoSliced"]
         this.skipItemNames = ["chicken", "groundBeef", "noodles", "chili", "pepper", "salt", "soySauce", "carrotSliced", "garlicSliced", "tomatoSliced"]
         this.skipItemText = ["Chicken", "Ground Beef", "Noodles", "Chili Flakes", "Pepper", "Salt", "Soy Sauce", "Sliced Carrot", "Sliced Garlic", "Sliced Tomato"]
-        this.cuttable = ["tomato", "garlic", "carrot", "carrotSliced", "garlicSliced", "tomatoSliced"]
+        this.cuttable = ["tomato", "garlic", "carrot"]
         this.main = ["chicken", "groundBeef", "noodles"]
-        this.vegetable = this.cuttable
+        this.vegetable = ["tomato", "garlic", "carrot", "carrotSliced", "garlicSliced", "tomatoSliced"]
         this.seasoning = ["chili", "pepper", "salt", "soySauce"]
 
         this.items = []

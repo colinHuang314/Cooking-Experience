@@ -97,6 +97,8 @@ class WordCombo{
                 letterText.setStyle(this.highlightedConfig)
 
                 this.currentLetterIndex++
+                //sound
+                this.scene.sound.play('spacePress', { volume: 0.55, detune: this.currentLetterIndex*100 })
 
                 // word fully typed
                 if(this.currentLetterIndex === this.word.length){
@@ -125,6 +127,8 @@ class WordCombo{
 
     // complete animation, then callback
     wordComplete(){
+        this.scene.sound.play('wordComplete', {volume: 0.5})
+
         //https://phaser.io/examples/v3.85.0/tweens/view/multiple-delayed-properties and others
         this.scene.tweens.add({
             targets: this.letterTexts,

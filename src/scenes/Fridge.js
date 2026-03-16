@@ -32,6 +32,7 @@ class Fridge extends Phaser.Scene {
 
         // scene nav
         const stoveComboText = new WordCombo(this, 100, 480, 'Cabinet', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
+            this.sound.play('sceneChange', {rate: 0.75})
             this.time.delayedCall(250, () => {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)
@@ -41,6 +42,7 @@ class Fridge extends Phaser.Scene {
             })
         })
         const fridgeComboText = new WordCombo(this, 520, 480, 'Counter', defaultTextConfig, defaultTextHighlightedConfig, null, () => {
+            this.sound.play('sceneChange', {rate: 0.75})
             this.time.delayedCall(250, () => {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)
@@ -50,6 +52,7 @@ class Fridge extends Phaser.Scene {
             })
         })
         const counterComboText = new WordCombo(this, 320, 480, 'Stove', defaultTextConfig, defaultTextHighlightedConfig, null,() => {
+            this.sound.play('sceneChange', {rate: 0.75})
             this.time.delayedCall(250, () => {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)
@@ -60,6 +63,7 @@ class Fridge extends Phaser.Scene {
         })
 
         const menuComboText = new WordCombo(this, 60, 30, 'Menu', menuTextConfig, menuTextHighlightedConfig, null,() => {
+            this.sound.play('sceneChange', {rate: 0.75})
             this.time.delayedCall(250, () => {
                 //wait before switching to play
                 this.cameras.main.fadeOut(900)

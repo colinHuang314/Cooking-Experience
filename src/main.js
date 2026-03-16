@@ -1,12 +1,13 @@
 /*
 Name: Colin Huang
 
-Title: Cooking Experience
+Title: Cooking At Manzanita
 
 Time Spent: 28 hrs
 
 Notes:  Type "skip" during the intro of the game to skip the intro
         Type "skip" in the menu to get all items and go to the stove scene
+        Type "skip" in the stove scene to skip to the ending
 
         For the 5 components I did:
             - text objects
@@ -28,17 +29,12 @@ Prof. Altice
 
 
 TODO
-conclusion(flip?)
+conclusion(flip?)(animations, other effects?)
 replay without reloading
 
 credits(what i made and what i used)
 
-5 major components
-
-!!! SOUND
-
-seasoning particles
-pot particles
+add more messages
 
 stove logic and conclusion logic
 */
