@@ -1,13 +1,3 @@
-/*
-hearts come out of the pot,
-messages are faded in and out like the intro to say nice things
-
-text appears "press spacebar to restart"
-the pot moves to the left and smaller, and the spacebar text under it and smaller
- credits start scrolling up on the right side of the screen.
- random foods come up every 5 lines anda are thrown in the pot 
- start emmiter at the end
-*/
 
 class Ending extends Phaser.Scene {
     constructor() {
@@ -19,7 +9,6 @@ class Ending extends Phaser.Scene {
 
     create() {
         this.canRestart = false
-        console.log("ending create")
         
         this.restartTextConfig = {
             fontFamily: 'Helvetica',

@@ -81,17 +81,6 @@ class Menu extends Phaser.Scene{
                 bottom: 25,
             },
         }
-        
-
-        // add sprites
-        // this.pot = this.add.image(300, 400, 'pot').setOrigin(0.5)
-        // this.apple = this.add.image(300, 300, 'apple').setOrigin(0.5)
-
-        //this.add.rectangle(300,400, 200, 120, 0x000000).setOrigin(0.5)
-
-        // display menu text
-        // title
-        // this.add.text(game.config.width/2, 40, 'Cooking at Manzanita', titleConfig).setOrigin(0.5)
 
         // instructions
         this.add.text(game.config.width/2, 40, 'Welcome to the kitchen!', instructionsConfig).setOrigin(0.5)
@@ -146,16 +135,7 @@ class Menu extends Phaser.Scene{
                     
                 })
             })
-        })
-
-    
-    
-        this.input.on('pointerdown', (pointer) => {
-            console.log(`menu Pointer down at (${pointer.x}, ${pointer.y})`)
-        })
-
-        
-        
+        })  
     }
 
     update() {

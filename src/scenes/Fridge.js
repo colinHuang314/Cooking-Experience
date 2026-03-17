@@ -7,7 +7,6 @@ class Fridge extends Phaser.Scene {
     }
 
     create() {
-        console.log("fridge create")
         this.cameras.main.setBackgroundColor('#D6B687')
         this.cameras.main.fadeIn(900)
         this.events.on('wake', () => {
@@ -141,11 +140,6 @@ class Fridge extends Phaser.Scene {
             this.message.setAlpha(1)
             this.message.setY(650)
         })
-
-        this.input.on('pointerdown', (pointer) => {
-            console.log(`fridge Pointer down at (${pointer.x}, ${pointer.y})`)
-        })
-
 
     }
 

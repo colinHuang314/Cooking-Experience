@@ -7,7 +7,6 @@ class Cabinet extends Phaser.Scene {
     }
 
     create() {
-        console.log("cab create")
         this.cameras.main.setBackgroundColor('#D6B687')
         this.cameras.main.fadeIn(900)
         this.events.on('wake', () => {
@@ -169,19 +168,11 @@ class Cabinet extends Phaser.Scene {
             })
         })
 
-
         // initial message
         this.animations.messageAnimation(this.message, 10000, () => {
             this.message.setAlpha(1)
             this.message.setY(650)
         })
-
-        this.input.on('pointerdown', (pointer) => {
-            console.log(`cab Pointer down at (${pointer.x}, ${pointer.y})`)
-            // const pepper = itemsPanel.add.image(310, 310, 'pepper').setOrigin(0.5)
-            // itemsPanel.addItem(pepper, "pepper")
-        })
-
 
     }
 

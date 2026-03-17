@@ -7,7 +7,6 @@ class Stove extends Phaser.Scene {
     }
 
     create() {
-        console.log("stove create")
         this.cameras.main.setBackgroundColor('#D6B687')
         this.cameras.main.fadeIn(900)
 
@@ -132,11 +131,6 @@ class Stove extends Phaser.Scene {
             this.message.setY(650)
         })
 
-        this.input.on('pointerdown', (pointer) => {
-            console.log(`stove Pointer down at (${pointer.x}, ${pointer.y})`)
-        })
-
-
     }
 
     setWordCombos(){
@@ -258,15 +252,11 @@ class Stove extends Phaser.Scene {
                                         this.finishAnimation()
                                     })
                                 })
-
                         })
                     })
-
                 })
             })
-
         })
-
     }
 
     finishAnimation(){

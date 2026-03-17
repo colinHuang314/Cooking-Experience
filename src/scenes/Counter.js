@@ -7,7 +7,6 @@ class Counter extends Phaser.Scene {
     }
 
     create() {
-        console.log("counter create")
         this.cameras.main.setBackgroundColor('#D6B687')
         this.cameras.main.fadeIn(900)
 
@@ -86,11 +85,6 @@ class Counter extends Phaser.Scene {
             this.message.setAlpha(1)
             this.message.setY(650)
         })
-
-        this.input.on('pointerdown', (pointer) => {
-            console.log(`counter Pointer down at (${pointer.x}, ${pointer.y})`)
-        })
-
 
     }
 
