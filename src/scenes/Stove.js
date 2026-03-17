@@ -295,13 +295,25 @@ class Stove extends Phaser.Scene {
             onComplete: () => {
                 starEmitter.explode(90)
                 this.time.delayedCall(250, () => {
-                    this.scene.launch('endingScene')
-                    itemsPanel.cameras.main.fadeOut(1500)
-                    this.cameras.main.fadeOut(1500)
+                    this.switchToEnding()
                 })
 
 
             }
+        })
+    }
+
+    switchToEnding() {
+        endingScene.cameras.main.setVisible(true)
+        this.scene.wake('endingScene')
+        endingScene.startAnimation()
+        
+        itemsPanel.cameras.main.fadeOut(1500)
+        this.cameras.main.fadeOut(1500)
+        
+        this.time.delayedCall(1500, () => {
+            this.scene.stop()
+            itemsPanel.scene.stop()
         })
     }
 }   

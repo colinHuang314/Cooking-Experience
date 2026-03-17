@@ -103,7 +103,8 @@ class Instructions extends Phaser.Scene {
             if (combo === skipCombo) {
                 this.scene.switch('menuScene')
                 if (! this.soundPlaying){
-                    this.sound.play('music', { loop: true, volume: 0.4 })
+                    music = this.sound.add('music', { loop: true, volume: 0.4 })
+                    music.play()
                     this.soundPlaying = true
                 }
             }   
@@ -173,7 +174,8 @@ class Instructions extends Phaser.Scene {
                 // audio on first key press
                 if (index == 1) {
                     if (! this.soundPlaying){
-                        this.sound.play('music', { loop: true, volume: 0.4 })
+                        music = this.sound.add('music', { loop: true, volume: 0.4 })
+                        music.play()
                         this.soundPlaying = true
                     }
                 }

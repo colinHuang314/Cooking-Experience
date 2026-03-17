@@ -3,7 +3,7 @@ Name: Colin Huang
 
 Title: Cooking At Manzanita
 
-Time Spent: 30 hrs
+Time Spent: 32 hrs
 
 Notes:  Type "skip" during the intro of the game to skip the intro
         Type "skip" in the menu to get all items and go to the stove scene
@@ -25,17 +25,6 @@ https://phaser.io/examples/v3.85.0/tweens/view/multiple-delayed-properties
 https://phaser.io/examples/v3.85.0/tweens/view/multiple-targets-multiple-properties
 https://stackoverflow.com/questions/12462318/find-a-value-in-an-array-of-objects-in-javascript
 Prof. Altice
-
-
-
-TODO
-conclusion(flip?)(animations, other effects?)
-replay without reloading
-
-credits(what i made and what i used)
-
-add more messages
-
 */
 
 
@@ -47,6 +36,8 @@ config = {
         antialias: true,
     },
     scale: {
+        // mode: Phaser.Scale.NONE,
+        mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: [ Load, Instructions, Menu, Fridge, Cabinet, Stove, Counter, ItemsPanel, Ending],
@@ -113,11 +104,9 @@ let defaultTextHighlightedConfig = {
 
 // scenes
 let itemsPanel = null
-let fridgeScene = null
-let cabinetScene = null
-let stoveScene = null
-let counterScene = null
-let menuScene = null
+let endingScene = null
+
+let music = null
 
 
 // wordcombo text configs

@@ -35,18 +35,18 @@ class Animations{
             duration: 1200,
             ease: 'Power2.easeOut',
             onComplete: () => {
-                this.scene.tweens.add({
-                    targets: messageText,
-                    alpha: 0,
-                    duration: 1200,
-                    delay: time,
-                    ease: 'Linear',
-                    onComplete: () => {
-                        if(callback) {
-                            callback()
-                        }
-                    }
-                })
+                // this.scene.tweens.add({
+                //     targets: messageText,
+                //     alpha: 0,
+                //     duration: 1200,
+                //     delay: time,
+                //     ease: 'Linear',
+                //     onComplete: () => {
+                //         if(callback) {
+                //             callback()
+                //         }
+                //     }
+                // })
             }
         })
     }

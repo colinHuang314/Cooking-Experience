@@ -8,6 +8,7 @@ class ItemsPanel extends Phaser.Scene {
     }
 
     create() {
+        this.cameras.main.setVisible(false)
         this.allItemNames = ["tomato", "garlic", "carrot", "chicken", "groundBeef", "noodles", "chili", "pepper", "salt", "soySauce", "carrotSliced", "garlicSliced", "tomatoSliced"]
         this.skipItemNames = ["chicken", "groundBeef", "noodles", "chili", "pepper", "salt", "soySauce", "carrotSliced", "garlicSliced", "tomatoSliced"]
         this.skipItemText = ["Chicken", "Ground Beef", "Noodles", "Chili Flakes", "Pepper", "Salt", "Soy Sauce", "Sliced Carrot", "Sliced Garlic", "Sliced Tomato"]

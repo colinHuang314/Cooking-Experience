@@ -18,8 +18,8 @@ class Load extends Phaser.Scene {
 
         // get panel ready
         this.scene.launch('itemsPanelScene')
-        itemsPanel = this.scene.get("itemsPanelScene")
-        itemsPanel.cameras.main.setVisible(false)
+        this.scene.launch('endingScene')
+        
 
         // audio
         this.load.audio('music', './assets/sound/music.mp3')
@@ -71,7 +71,10 @@ class Load extends Phaser.Scene {
     }
 
     create() {
-        // this.scene.start('instructionsScene')
-        this.scene.start('endingScene')
+        itemsPanel = this.scene.get("itemsPanelScene")
+        endingScene = this.scene.get("endingScene")
+        
+
+        this.scene.switch('instructionsScene')
     }
 }

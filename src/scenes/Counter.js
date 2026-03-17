@@ -144,6 +144,23 @@ class Counter extends Phaser.Scene {
                                         itemsPanel.addItem(newSlicedItem, i.name + "Sliced", 'Sliced ' + i.text)
                                         slicedItem.destroy()
                                     })
+
+                                    let pickupText = ''
+                                    if(i.text == "Garlic"){
+                                        pickupText = "Smells good."
+                                    }
+                                    else if(i.text == "Carrot"){
+                                        pickupText = "Scoop up those carrots."
+                                    }
+                                    else if(i.text == "Tomato"){
+                                        pickupText = "Tomato juice dripped on the counter,\nbut its already dirty."
+                                    }
+                                    this.message.destroy()
+                                    this.message = this.add.text(325, 650, pickupText).setOrigin(0.5).setFontSize(20).setLineSpacing(12)
+                                    this.animations.messageAnimation(this.message, 4000, () => {
+                                        this.message.setAlpha(1)
+                                        this.message.setY(650)
+                                    })
                                     
                                 })
                             })
